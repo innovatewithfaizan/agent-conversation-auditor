@@ -1,0 +1,40 @@
+{
+  "conv_id": "8819",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "No agent violations found. The agent followed verification procedures, requested only the necessary account and order details, did not ask for or disclose sensitive payment data, made no out-of-policy promises, and behaved courteously.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2144,
+    "output_tokens": 1395,
+    "cost_usd": 0.00333
+  },
+  "seconds": 14.9,
+  "dataset": "benchmark"
+}

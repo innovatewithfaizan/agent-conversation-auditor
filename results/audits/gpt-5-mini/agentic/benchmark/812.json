@@ -1,0 +1,65 @@
+{
+  "conv_id": "812",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 26-turn conversation: agent followed verification and data-handling procedures; no policy violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 11
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 12,
+        "last": 23
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 24,
+        "last": 25
+      },
+      "turns": 2
+    }
+  ],
+  "usage": {
+    "calls": 4,
+    "input_tokens": 10251,
+    "output_tokens": 1526,
+    "cost_usd": 0.00561
+  },
+  "seconds": 14.4,
+  "dataset": "benchmark"
+}

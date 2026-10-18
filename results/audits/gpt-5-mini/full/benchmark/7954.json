@@ -1,0 +1,52 @@
+{
+  "conv_id": "7954",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Minor issues: agent attempted an order action before the account was pulled (verification) and made an over-confident delivery timing claim (promises). No personal/payment data, escalation, or conduct violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 10,
+          "quote": "You're welcome! Let's proceed with the overnight shipping update.",
+          "explanation": "The agent says they will proceed with an order change before the system shows the account was pulled (system log at turn 12). Policy requires pulling up the account before any account or order action; doing so after announcing an action is a verification lapse."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 22,
+          "quote": "The shipping cannot be changed if in transit. But, in transit means you will get either today or tomorrow at the latest.",
+          "explanation": "The agent makes a definitive-sounding delivery timing claim ('you will get either today or tomorrow at the latest'), which is over-confident. The policy flags over-confident guarantees about likely outcomes as a minor violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2183,
+    "output_tokens": 2147,
+    "cost_usd": 0.00484
+  },
+  "seconds": 16.7,
+  "dataset": "benchmark"
+}

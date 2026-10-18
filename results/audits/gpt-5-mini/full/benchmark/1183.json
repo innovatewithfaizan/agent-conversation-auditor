@@ -1,0 +1,46 @@
+{
+  "conv_id": "1183",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent reinstated a subscription without completing the full verification required for subscription actions (missing account ID and order ID). No personal data, promises, escalation or conduct violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 22,
+          "quote": "And... done! Your service has been reinstated.",
+          "explanation": "The agent confirmed an account action (reinstating the subscription) at turn 22 while full verification for subscription changes (which requires full name, account ID and order ID) was not completed. The agent had the customer's name and the account was pulled (turns 5, 6 and system turn 8) but did not obtain an account ID or an order ID — the agent asked for the order ID in turn 11 and the customer said they did not have it (turn 12). The system shows the service was added (system turn 21), so an order/account change was performed without the required verification, which is a major violation per policy."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2204,
+    "output_tokens": 1620,
+    "cost_usd": 0.00379
+  },
+  "seconds": 14.6,
+  "dataset": "benchmark"
+}

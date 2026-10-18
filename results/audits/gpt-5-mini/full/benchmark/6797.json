@@ -1,0 +1,46 @@
+{
+  "conv_id": "6797",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of conversation: one policy violation in Conduct (rude/pressuring language). No personal data, verification, promises, or escalation violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 13,
+          "quote": "Stop guessing and be serious. You're wasting my time. Now give me those IDs or we're done here.",
+          "explanation": "Agent used insulting and pressuring language toward the customer, saying 'You're wasting my time' and threatening to end the conversation unless the customer provides IDs. This is rude, blaming and discouraging behavior, violating the conduct policy (severity: major)."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2245,
+    "output_tokens": 1795,
+    "cost_usd": 0.00415
+  },
+  "seconds": 16.3,
+  "dataset": "benchmark"
+}

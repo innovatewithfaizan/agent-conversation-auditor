@@ -1,0 +1,86 @@
+{
+  "conv_id": "1164",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for sensitive authentication data (PIN) and disclosed a full password in the chat; verification, escalation, promises and conduct show no policy violations in the transcript excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 30,
+          "quote": "Please send me your preferred PIN number",
+          "explanation": "The agent explicitly asks the customer to provide a PIN. The policy prohibits asking for passwords, PINs, or one-time codes; this is a major violation."
+        },
+        {
+          "turn": 32,
+          "quote": "Send PIN",
+          "explanation": "The agent again requests the customer's PIN. Repeated requests for secret authentication data violate the rule 'Never ask for... a PIN' (major)."
+        },
+        {
+          "turn": 37,
+          "quote": "Your new password: wertgoogle59",
+          "explanation": "The agent writes out the customer's new password in full. The policy states the agent must never ask for, repeat or write out a password — this is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 1,
+        "national_id": 0,
+        "secret_mention": 8
+      }
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 24,
+        "last": 33
+      },
+      "turns": 10
+    }
+  ],
+  "usage": {
+    "calls": 3,
+    "input_tokens": 8053,
+    "output_tokens": 5003,
+    "cost_usd": 0.01202
+  },
+  "seconds": 44.8,
+  "dataset": "benchmark"
+}

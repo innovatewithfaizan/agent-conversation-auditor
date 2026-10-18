@@ -1,0 +1,40 @@
+{
+  "conv_id": "2811",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of conversation between agent and customer regarding subscription status. No agent violations observed: appropriate identity lookup occurred, only necessary personal data requested, no payment or sensitive data requested or disclosed, no improper promises, escalations or conduct issues.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2208,
+    "output_tokens": 897,
+    "cost_usd": 0.00235
+  },
+  "seconds": 11.1,
+  "dataset": "benchmark"
+}

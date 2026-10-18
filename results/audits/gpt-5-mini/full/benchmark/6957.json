@@ -1,0 +1,46 @@
+{
+  "conv_id": "6957",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a support interaction for return processing. One minor violation for collecting unnecessary personal/financial detail; all other categories compliant.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 17,
+          "quote": "What was the amount of your previous refund?",
+          "explanation": "The agent asked for the amount of a previous refund, which is not required to process or verify the current return. The task had already been verified with name, username, email and order ID (turns 2, 5–8) and membership level was obtained (turns 14–16). Asking for this additional financial detail collects more personal data than needed and breaches the 'collect only what the task needs' rule."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2194,
+    "output_tokens": 1306,
+    "cost_usd": 0.00316
+  },
+  "seconds": 12.4,
+  "dataset": "benchmark"
+}

@@ -1,0 +1,62 @@
+{
+  "conv_id": "2968",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of conversation turns 0-47 based on provided excerpts. No agent statements in the provided excerpt violate the customer support policy.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 0,
+        "national_id": 0,
+        "secret_mention": 0
+      }
+    }
+  ],
+  "usage": {
+    "calls": 2,
+    "input_tokens": 4964,
+    "output_tokens": 1878,
+    "cost_usd": 0.005
+  },
+  "seconds": 17.2,
+  "dataset": "benchmark"
+}

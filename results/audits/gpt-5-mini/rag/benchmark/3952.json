@@ -1,0 +1,46 @@
+{
+  "conv_id": "3952",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "One major violation: the agent asked for a full credit card number. No other policy violations found in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 15,
+          "quote": "Okay, do you have a credit card number?",
+          "explanation": "The agent asked the customer to provide a full credit card number. The policy explicitly forbids asking for or writing out full payment card numbers; such requests are a 'major' violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2079,
+    "output_tokens": 1128,
+    "cost_usd": 0.00278
+  },
+  "seconds": 10.8,
+  "dataset": "benchmark"
+}

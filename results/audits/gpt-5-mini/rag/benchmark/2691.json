@@ -1,0 +1,40 @@
+{
+  "conv_id": "2691",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent behaviour across provided excerpts. No agent actions in the excerpts violate the customer support policy.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1999,
+    "output_tokens": 1309,
+    "cost_usd": 0.00312
+  },
+  "seconds": 12.1,
+  "dataset": "benchmark"
+}

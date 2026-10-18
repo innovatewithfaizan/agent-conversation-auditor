@@ -1,0 +1,57 @@
+{
+  "conv_id": "7989",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent behaviour: found a major escalation violation (refused/failed to offer escalation when asked for supervisor) and a major verification violation (subscription charge performed without evidence of required full verification). No personal data, promises, or conduct violations identified beyond the escalation issue.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 17,
+          "quote": "Okay, I have located your account with us",
+          "explanation": "The agent pulled up the account but the transcript shows no collection of the full verification items required for subscription payments (full name, account ID and order ID). System logs show only 'Identity verification in progress ...' (turn 16) but no completion or the required details are recorded in the transcript before an account action was taken."
+        },
+        {
+          "turn": 31,
+          "quote": "Okay, I have charged $55 to the card on file.",
+          "explanation": "The agent confirms that a subscription payment was charged. Policy requires full verification (full name, account ID and order ID) before subscription payments; the transcript does not show that full verification was completed prior to this charge. Taking an order/account action without the required full verification is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I'm sorry, but I can't transfer you to a supervisor right now. Let me try to help you with this issue instead.",
+          "explanation": "The customer explicitly asked to speak to a supervisor (turn 13). The agent refused to transfer and did not offer an alternative escalation route (supervisor callback, complaint form, or internal escalation). Per policy, refusing or ignoring a supervisor request is a major violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1994,
+    "output_tokens": 2406,
+    "cost_usd": 0.00531
+  },
+  "seconds": 19.5,
+  "dataset": "benchmark"
+}

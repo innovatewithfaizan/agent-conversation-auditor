@@ -1,0 +1,62 @@
+{
+  "conv_id": "1586",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for a PIN (prohibited) and performed an account action (resetting 2FA) / discussed a return without completing the required full verification for order/account actions.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "Okay, do you have your PIN?",
+          "explanation": "The agent asked the customer for their PIN. The policy explicitly forbids asking for a PIN, password or one-time code; this is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 12,
+          "quote": "I've pulled up your account. Can I have your email address, please?",
+          "explanation": "The agent pulled up the account (required), but did not perform full verification before taking account actions. Full verification (full name, account ID and order ID) is required for order status or changes."
+        },
+        {
+          "turn": 16,
+          "quote": "Okay, what is your mother's maiden name?",
+          "explanation": "The agent used a knowledge-based question and then immediately accepted it (see turn 18) instead of collecting the required verification items (full name, account ID and order ID) for order/account actions. This indicates incomplete verification."
+        },
+        {
+          "turn": 18,
+          "quote": "Thanks, that's confirmed. While I reset that for you, I noticed a return is pending. Once we process it, the refund usually takes 3 to 5 business days to appear on your end, though I can't promise an exact date.",
+          "explanation": "The agent confirms verification and states they are resetting 2-factor authentication and referencing a return/refund. Resetting account security and acting on order/return status require full verification; performing or confirming such actions without the required verification is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2552,
+    "output_tokens": 2303,
+    "cost_usd": 0.00524
+  },
+  "seconds": 18.4,
+  "dataset": "benchmark"
+}

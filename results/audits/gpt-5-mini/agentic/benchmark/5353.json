@@ -1,0 +1,84 @@
+{
+  "conv_id": "5353",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent pulled up the account and provided accurate guidance about promo code timing. No sensitive payment data was requested or shared, and no verification-required actions were taken without pulling the account. One minor conduct issue: an informal/curt phrase by the agent.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 2,
+          "quote": "huh, let's see what we can find out",
+          "explanation": "Agent's phrasing 'huh, let's see what we can find out' is informal and can be interpreted as curt or dismissive. Policy requires courteous tone; a curt or dismissive tone is a minor conduct violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 11
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 12,
+        "last": 24
+      },
+      "turns": 12
+    },
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 0,
+        "national_id": 0,
+        "secret_mention": 0
+      }
+    }
+  ],
+  "usage": {
+    "calls": 4,
+    "input_tokens": 10556,
+    "output_tokens": 1763,
+    "cost_usd": 0.00617
+  },
+  "seconds": 19.5,
+  "dataset": "benchmark"
+}

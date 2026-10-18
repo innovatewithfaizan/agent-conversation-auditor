@@ -1,0 +1,57 @@
+{
+  "conv_id": "7989",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent refused a supervisor request and proceeded to charge a subscription without completing required full verification. No personal-data or promises violations were found; conduct was acceptable aside from escalation refusal.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 17,
+          "quote": "Okay, I have located your account with us",
+          "explanation": "Agent pulled up the account but did not collect the full verification required for a subscription payment (username, email address and order ID). System logs show 'Identity verification in progress ...' (turn 16) and later the account was updated and charged (system turns 29-30), so the subscription charge occurred without the full verification the policy requires."
+        },
+        {
+          "turn": 31,
+          "quote": "Okay, I have charged $55 to the card on file.",
+          "explanation": "Agent confirmed a billing action (charging the card) for a subscription. Policy requires full verification before subscription payments; the transcript does not show the required verification details (username, email and order ID) were collected before this action."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I'm sorry, but I can't transfer you to a supervisor right now. Let me try to help you with this issue instead.",
+          "explanation": "Customer explicitly asked to speak to a supervisor (turn 13). Agent refused the transfer instead of offering the escalation route (supervisor, complaint form or internal team), which violates the escalation policy."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2370,
+    "output_tokens": 1695,
+    "cost_usd": 0.00398
+  },
+  "seconds": 15.9,
+  "dataset": "benchmark"
+}

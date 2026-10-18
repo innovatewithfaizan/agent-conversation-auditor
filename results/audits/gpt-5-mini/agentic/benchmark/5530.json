@@ -1,0 +1,58 @@
+{
+  "conv_id": "5530",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 27-turn conversation: agent disclosed another customer's account/payment details (critical), took an account-related action with no evidence of pulling up/verifying the customer's account (major), and made an overconfident promise of a same-day resolution (minor). No escalation or conduct violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "critical",
+      "findings": [
+        {
+          "turn": 10,
+          "quote": "Just so you know, Erica Clark's account has the same issue on the shirt page—her card ending in 8360 was declined last time, but she’s still trying to purchase.",
+          "explanation": "The agent disclosed another customer's name and payment information (card ending in 8360). The policy forbids revealing another customer's personal or payment details to anyone; this is a critical violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 11,
+          "quote": "first, i will write up a report to our internal team notifying them of a potential issue",
+          "explanation": "The agent indicates they will take an account-related action (writing a report to the internal team) but there is no evidence in the transcript or system turns that the agent pulled up or verified the customer's account first. The policy requires pulling up the account before any account or order action; taking such an action with no verification is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 8,
+          "quote": "i can certain get this solved today for you chloe",
+          "explanation": "The agent gives an over-confident promise of same-day resolution. This guaranteed-sounding language is a minor violation of the policy on commitments and claims."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2430,
+    "output_tokens": 2490,
+    "cost_usd": 0.00559
+  },
+  "seconds": 19.9,
+  "dataset": "benchmark"
+}

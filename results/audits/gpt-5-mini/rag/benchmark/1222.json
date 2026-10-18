@@ -1,0 +1,46 @@
+{
+  "conv_id": "1222",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for a PIN (sensitive payment/authentication data), which violates the personal and payment data policy. No other agent violations were found in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 23,
+          "quote": "do you have your pin number?",
+          "explanation": "The agent asked the customer for their PIN. The policy explicitly forbids asking for or recording PINs, passwords, one-time codes, or full card/security numbers. This is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1950,
+    "output_tokens": 1584,
+    "cost_usd": 0.00366
+  },
+  "seconds": 14.2,
+  "dataset": "benchmark"
+}

@@ -1,0 +1,57 @@
+{
+  "conv_id": "972",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 24-turn conversation checking agent actions against verification, personal data, promises, escalation and conduct policies.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 15,
+          "quote": "can I have your phone number and email address please",
+          "explanation": "The agent requests the customer's phone number and email. For an address change the policy requires full verification (full name, account ID and order ID); phone and email are not required and thus collecting them is more data than necessary."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 5,
+          "quote": "Can I start with your full name and account ID number please",
+          "explanation": "The agent only asked for the customer's full name and account ID. Policy requires full verification (full name, account ID and order ID) before making changes to address."
+        },
+        {
+          "turn": 20,
+          "quote": "Ok Your account has been updated.",
+          "explanation": "The agent confirms the account update after earlier verification steps that did not include the required order ID. Per the policy, performing or confirming an account change without full verification is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2068,
+    "output_tokens": 2168,
+    "cost_usd": 0.00485
+  },
+  "seconds": 17.2,
+  "dataset": "benchmark"
+}

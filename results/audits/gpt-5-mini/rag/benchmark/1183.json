@@ -1,0 +1,40 @@
+{
+  "conv_id": "1183",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 29-turn conversation excerpts. No agent violations found in the provided excerpts: agent requested expected verification details, account was pulled per system log, and the agent performed allowed account actions (adding a subscription) after the account was pulled. All policy categories are marked 'none'.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1994,
+    "output_tokens": 1932,
+    "cost_usd": 0.00436
+  },
+  "seconds": 19.6,
+  "dataset": "benchmark"
+}

@@ -1,0 +1,40 @@
+{
+  "conv_id": "2691",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a short product/FAQ support conversation. No agent policy violations found across personal data, verification, promises, escalation, or conduct based on the provided transcript.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2233,
+    "output_tokens": 1002,
+    "cost_usd": 0.00256
+  },
+  "seconds": 9.9,
+  "dataset": "benchmark"
+}

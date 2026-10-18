@@ -1,0 +1,40 @@
+{
+  "conv_id": "7782",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "No policy violations found. The agent requested only necessary identity and order details, the account was pulled up and purchase validation occurred before a refund was processed, and the agent’s language and conduct complied with policy.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2161,
+    "output_tokens": 1084,
+    "cost_usd": 0.00271
+  },
+  "seconds": 8.5,
+  "dataset": "benchmark"
+}

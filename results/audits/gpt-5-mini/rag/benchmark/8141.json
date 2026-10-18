@@ -1,0 +1,40 @@
+{
+  "conv_id": "8141",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 28-turn conversation excerpts: agent followed verification and data-collection procedures appropriately; no policy violations found in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2026,
+    "output_tokens": 686,
+    "cost_usd": 0.00188
+  },
+  "seconds": 8.1,
+  "dataset": "benchmark"
+}

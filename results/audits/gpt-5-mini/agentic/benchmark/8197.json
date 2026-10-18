@@ -1,0 +1,55 @@
+{
+  "conv_id": "8197",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent initiated an account action (starting a return) before pulling up or verifying the customer's account. No personal-data, promises, escalation, or conduct violations observed in the excerpt.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 2,
+          "quote": "Sure thing! I've already started the return for your order. The refund will appear in your account within 5-7 business days.",
+          "explanation": "The agent states that they have already started the return and that a refund will appear, which is an account/order action taken before the agent pulled up or verified the customer's account. The transcript shows the agent asks to pull up the account only in the next turns (turn 3) and the system only pulls the account up at turn 7, so the action was claimed without prior verification. Per policy, any account or order action requires the agent first pull up the account."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 11
+      },
+      "turns": 12
+    }
+  ],
+  "usage": {
+    "calls": 2,
+    "input_tokens": 4868,
+    "output_tokens": 2647,
+    "cost_usd": 0.00651
+  },
+  "seconds": 22.4,
+  "dataset": "benchmark"
+}

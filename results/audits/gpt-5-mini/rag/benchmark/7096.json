@@ -1,0 +1,46 @@
+{
+  "conv_id": "7096",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit based on provided excerpts (turns 0-32).",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 18,
+          "quote": "Great, your order is on its way and should definitely arrive tomorrow. Let me know if anything else comes up!",
+          "explanation": "Agent confirms order status and a specific delivery date (an order/action regarding delivery) without evidence of pulling up the account or completing identity verification. System turn 16 shows only 'Agent is looking for solutions ...' and does not indicate the required account pull (full name or account ID). Per policy, an account or order action must not be taken or confirmed without verification (major violation)."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2071,
+    "output_tokens": 1489,
+    "cost_usd": 0.0035
+  },
+  "seconds": 12.5,
+  "dataset": "benchmark"
+}

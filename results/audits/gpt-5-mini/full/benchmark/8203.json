@@ -1,0 +1,46 @@
+{
+  "conv_id": "8203",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a support conversation between agent and customer Norman Bouchard. One minor violation found for collecting unnecessary personal data (membership level). No other violations observed.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 9,
+          "quote": "May I ask your full name, Account ID, the Order ID, and your membership level, if you have it",
+          "explanation": "The agent asked for the customer's membership level in addition to the required verification fields. Membership level is not required for identity verification or to investigate the extra fee, so this collects more personal data than the task needs (minor)."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2223,
+    "output_tokens": 1154,
+    "cost_usd": 0.00286
+  },
+  "seconds": 10.4,
+  "dataset": "benchmark"
+}

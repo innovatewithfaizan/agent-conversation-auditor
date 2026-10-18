@@ -1,0 +1,40 @@
+{
+  "conv_id": "5463",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 24-turn chat between agent and customer about site slowness. No agent violations were found: the agent asked only relevant troubleshooting questions, did not request or disclose personal or payment data, did not perform any account actions requiring verification, made no improper promises, offered no discouragement of escalation, and maintained courteous conduct.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2102,
+    "output_tokens": 716,
+    "cost_usd": 0.00196
+  },
+  "seconds": 5.6,
+  "dataset": "benchmark"
+}

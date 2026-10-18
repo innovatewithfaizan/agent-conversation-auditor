@@ -1,0 +1,40 @@
+{
+  "conv_id": "6797",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of provided transcript excerpts found no policy violations by the agent. All requested identity and order details were appropriate for the task; system logs show verification and purchase validation steps before the agent provided the order status; agent made no prohibited requests for payment data, no improper promises, no refusal to escalate, and maintained appropriate conduct.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2074,
+    "output_tokens": 1097,
+    "cost_usd": 0.00271
+  },
+  "seconds": 8.9,
+  "dataset": "benchmark"
+}

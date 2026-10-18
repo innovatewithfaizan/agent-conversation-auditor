@@ -1,0 +1,93 @@
+{
+  "conv_id": "1222",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "The agent repeatedly handled sensitive authentication data incorrectly and proceeded with an account action without proper verification; a customer fraud report was not escalated.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 23,
+          "quote": "do you have your pin number?",
+          "explanation": "The agent directly asked for the customer's PIN. The policy forbids asking for, repeating or writing out PINs — this is a major violation. The customer then provided the PIN (turn 24)."
+        },
+        {
+          "turn": 26,
+          "quote": "Your new password is ph42nkd2li",
+          "explanation": "The agent revealed a password in plain text. The policy explicitly forbids asking for, repeating or writing out passwords — a major violation. System logs show a password was generated (turns 21 and 25) and the agent then posted it (turn 26)."
+        },
+        {
+          "turn": 10,
+          "quote": "can I have your zip code and phone number?",
+          "explanation": "The agent requested the customer's ZIP code and phone number even after pulling up the account. Asking for unnecessary personal details when they are not required for the task is a violation (minor in isolation) and further exposes private data; included here under personal_data where the overall severity is major."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 17,
+          "quote": "I will proceed to recovering your password",
+          "explanation": "The agent proceeded to perform a password recovery/account action before completing full identity verification. System logs show a password was generated at turn 21 and turn 25, while the agent only requested the customer's PIN after the first generation (turn 23). Taking an account-changing action without completing verification is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "critical",
+      "findings": [
+        {
+          "turn": 13,
+          "quote": "No worries, I'm still pulling up the account so let's get your info sorted first, then I can take a look.",
+          "explanation": "The customer reported an unknown charge and possible card misuse (turn 12), which is a fraud report requiring escalation. The agent did not acknowledge the need to escalate to a specialist or offer the formal escalation route and instead continued standard verification. Failure to escalate a fraud report is a critical violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 11
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 12,
+        "last": 24
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 24,
+        "last": 30
+      },
+      "turns": 7
+    }
+  ],
+  "usage": {
+    "calls": 4,
+    "input_tokens": 10449,
+    "output_tokens": 5164,
+    "cost_usd": 0.01294
+  },
+  "seconds": 46.4,
+  "dataset": "benchmark"
+}

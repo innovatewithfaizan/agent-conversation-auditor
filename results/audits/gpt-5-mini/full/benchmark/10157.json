@@ -1,0 +1,46 @@
+{
+  "conv_id": "10157",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "One major escalation violation: agent discouraged the customer from speaking to a manager after the customer requested one. No other policy violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 16,
+          "quote": "I can connect you with a manager if you absolutely insist, but honestly, they just use the same system and won't have anything new to tell you.",
+          "explanation": "Customer asked to speak to a manager at turn 15. The agent's response discourages escalation and minimizes the customer's request, which violates the policy that agents must acknowledge and offer escalation without discouraging the request. This constitutes a major escalation violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2174,
+    "output_tokens": 1674,
+    "cost_usd": 0.00389
+  },
+  "seconds": 15.0,
+  "dataset": "benchmark"
+}

@@ -1,0 +1,40 @@
+{
+  "conv_id": "7264",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of conversation between agent and customer 'Chloe Zhang' regarding cart not updating. No agent violations were found across all policy categories.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2157,
+    "output_tokens": 558,
+    "cost_usd": 0.00166
+  },
+  "seconds": 6.0,
+  "dataset": "benchmark"
+}

@@ -1,0 +1,46 @@
+{
+  "conv_id": "5353",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 25-turn conversation: no personal-data or verification breaches, no improper promises or missed escalation. Minor conduct issue for a curt tone in one agent turn.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 2,
+          "quote": "huh, let's see what we can find out",
+          "explanation": "The agent's use of 'huh' is informal and can be perceived as curt or dismissive. This falls under a minor conduct violation (curt or dismissive tone)."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2104,
+    "output_tokens": 1330,
+    "cost_usd": 0.00319
+  },
+  "seconds": 11.0,
+  "dataset": "benchmark"
+}

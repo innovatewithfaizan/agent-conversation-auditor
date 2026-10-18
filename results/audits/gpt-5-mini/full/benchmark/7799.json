@@ -1,0 +1,58 @@
+{
+  "conv_id": "7799",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit found a major personal/payment-data violation (agent asked for card security code), minor issues for promises (contradictory refund statement) and conduct (rude/curt language). No verification or escalation violations were found.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "Thanks. Quick check before I process it - what's the 3-digit code on the back of your card?",
+          "explanation": "The agent asked for the card security code (CVV/CVC). Policy explicitly forbids asking for, repeating or writing out card security codes. The customer then provided the 3-digit code (turn 15) and the agent subsequently validated the purchase (turn 17), indicating the sensitive data was used — confirming the severity of the violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 23,
+          "quote": "As the order is out for delivery you can get full refund but can only get a part of it",
+          "explanation": "The agent made a contradictory and misleading statement about the refund (saying both a full refund and only part of it are possible). This is misleading and overconfident language about the outcome; it may confuse the customer about what to expect."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 4,
+          "quote": "You need to make this simple for me",
+          "explanation": "The agent used a curt and somewhat dismissive phrase that fails to be courteous. Policy marks curt or dismissive tone as a minor conduct violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2169,
+    "output_tokens": 2373,
+    "cost_usd": 0.00529
+  },
+  "seconds": 18.9,
+  "dataset": "benchmark"
+}

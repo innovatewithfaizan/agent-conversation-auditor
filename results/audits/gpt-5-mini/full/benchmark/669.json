@@ -1,0 +1,40 @@
+{
+  "conv_id": "669",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 30-turn conversation between agent and customer regarding subscription renewal. No agent actions in the transcript violated the customer-support policy: verification steps were followed, no prohibited payment data was requested or revealed, commitments were within policy, escalation procedures were not needed, and conduct was appropriate.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2228,
+    "output_tokens": 1547,
+    "cost_usd": 0.00365
+  },
+  "seconds": 15.1,
+  "dataset": "benchmark"
+}

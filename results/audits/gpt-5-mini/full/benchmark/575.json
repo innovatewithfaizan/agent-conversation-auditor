@@ -1,0 +1,40 @@
+{
+  "conv_id": "575",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of conversation: no policy violations found. The agent requested and received the required identity details (full name, account ID, order ID), the system logged the account pull and identity verification in progress before the order update, and the agent only referenced the payment card by its last four digits. The agent's language was courteous and accurate; no disallowed personal or payment data was requested or disclosed, no improper promises were made, and no escalation or conduct issues were present.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2195,
+    "output_tokens": 1255,
+    "cost_usd": 0.00306
+  },
+  "seconds": 12.7,
+  "dataset": "benchmark"
+}

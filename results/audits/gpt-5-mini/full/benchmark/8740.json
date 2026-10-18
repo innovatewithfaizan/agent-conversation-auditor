@@ -1,0 +1,46 @@
+{
+  "conv_id": "8740",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent behavior in transcript: agent improperly requested full card number and security code (PCI/ privacy violation). Other areas compliant: verification, promises, escalation, conduct.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 12,
+          "quote": "Sure thing. Could you please provide your full card number and the security code for verification?",
+          "explanation": "The agent asked the customer to provide the full payment card number and the card security code (CVV). The policy explicitly forbids asking for or recording full card numbers or security codes; these requests are classified as a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2133,
+    "output_tokens": 1475,
+    "cost_usd": 0.00348
+  },
+  "seconds": 14.8,
+  "dataset": "benchmark"
+}

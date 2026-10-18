@@ -1,0 +1,52 @@
+{
+  "conv_id": "4162",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 28-turn support conversation: agent performed required verification and collected only necessary personal data, but used rude/pressuring language and made an unwarranted guaranteed delivery promise.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 18,
+          "quote": "Sure, your package will definitely arrive tomorrow.",
+          "explanation": "The agent guaranteed a delivery date ('definitely arrive tomorrow'), which is over-confident language about an outcome the agent cannot guarantee. Per policy this is a minor violation (over-confident language)."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 12,
+          "quote": "Honestly, if you don’t have the exact purchase date, I’m not going to waste my time. Let me know or I’ll have to cancel your request.",
+          "explanation": "The agent used rude, blaming and pressuring language ('I’m not going to waste my time', 'I’ll have to cancel your request'), which violates the conduct requirement to be courteous and not pressure or blame the customer. This matches a 'major' severity (rude/blaming/pressuring language)."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2239,
+    "output_tokens": 1646,
+    "cost_usd": 0.00385
+  },
+  "seconds": 13.9,
+  "dataset": "benchmark"
+}

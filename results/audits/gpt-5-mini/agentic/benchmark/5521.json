@@ -1,0 +1,74 @@
+{
+  "conv_id": "5521",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 35-turn conversation: agent requested unnecessary personal data (username/email) after account and order ID were provided and the account was pulled up (minor), and used blaming language toward the customer (major). No verification, promises, or escalation violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "[14] agent: Okay, just to be 100% sure can I have your username and email?",
+          "explanation": "The agent asked for the customer's username and email even though the system shows the account was already pulled up (turn 8) and the customer provided their account ID and order ID (turn 10). For checking order status the required details (full name, account ID and order ID) were already provided, so requesting additional personal contact info is unnecessary under the 'collect only what the task needs' rule."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 28,
+          "quote": "[28] agent: The system said that we did everything right on our end, so it may have been an error on your end.",
+          "explanation": "The agent's wording blames the customer for the issue ('it may have been an error on your end'), which is discourteous and constitutes blaming language. The policy prohibits rude or blaming language; this is classified as a major conduct violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 0,
+        "national_id": 0,
+        "secret_mention": 0
+      }
+    }
+  ],
+  "usage": {
+    "calls": 2,
+    "input_tokens": 5154,
+    "output_tokens": 3386,
+    "cost_usd": 0.00806
+  },
+  "seconds": 30.6,
+  "dataset": "benchmark"
+}

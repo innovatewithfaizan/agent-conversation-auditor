@@ -1,0 +1,97 @@
+{
+  "conv_id": "7096",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent confirmed order status and delivery without evidence of account verification; otherwise no personal data, escalation or conduct issues found. Promises category has no separate finding since the main issue is verification (agent both claimed delivery and acted on order without verification).",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 18,
+          "quote": "Great, your order is on its way and should definitely arrive tomorrow. Let me know if anything else comes up!",
+          "explanation": "Agent confirmed the customer's order status and guaranteed a delivery date. Per policy, any order or order-status action requires pulling up the account (full name or account ID) and full verification; there is no system log or agent turn showing the account was pulled up or the required verification completed before this statement. This is a major violation: an order action was taken/confirmed with no verification."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "search_transcript",
+      "input": {
+        "query": "order on its way"
+      },
+      "new_chunks": 3
+    },
+    {
+      "tool": "find_words",
+      "input": {
+        "words": [
+          "account",
+          "order",
+          "order ID",
+          "pull",
+          "pulled",
+          "Order"
+        ],
+        "speaker": "any"
+      },
+      "counts": {
+        "account": 1,
+        "order": 1,
+        "order ID": 0,
+        "pull": 0,
+        "pulled": 0,
+        "Order": 1
+      }
+    },
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 0,
+        "national_id": 0,
+        "secret_mention": 0
+      }
+    }
+  ],
+  "usage": {
+    "calls": 4,
+    "input_tokens": 10718,
+    "output_tokens": 1882,
+    "cost_usd": 0.00644
+  },
+  "seconds": 17.7,
+  "dataset": "benchmark"
+}

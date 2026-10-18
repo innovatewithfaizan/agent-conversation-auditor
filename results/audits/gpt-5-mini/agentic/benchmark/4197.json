@@ -1,0 +1,76 @@
+{
+  "conv_id": "4197",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent collected required verification details and completed the delivery-time change; no personal data or conduct violations were found. The only issue is a minor promises violation where the agent made a specific delivery-time claim.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 20,
+          "quote": "there, your order should now arrive in the evening",
+          "explanation": "The agent makes a specific delivery-time claim about when the order will arrive. The policy flags over-confident or guaranteed delivery statements as a minor violation (e.g., 'it will definitely arrive tomorrow'). Saying the order \"should now arrive in the evening\" is a specific time commitment the agent should avoid unless certain."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 23
+      },
+      "turns": 12
+    },
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 0,
+        "national_id": 0,
+        "secret_mention": 0
+      }
+    }
+  ],
+  "usage": {
+    "calls": 3,
+    "input_tokens": 7607,
+    "output_tokens": 1550,
+    "cost_usd": 0.005
+  },
+  "seconds": 16.5,
+  "dataset": "benchmark"
+}

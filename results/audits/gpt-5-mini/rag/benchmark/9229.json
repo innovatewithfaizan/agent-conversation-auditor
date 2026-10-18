@@ -1,0 +1,46 @@
+{
+  "conv_id": "9229",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 30-turn conversation excerpts. Agent asked for permitted account identifiers and requested order information appropriately. No requests for sensitive payment or password data were made. The agent used a rude/blaming phrase which violates conduct. No verification, promises or escalation violations were observed in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 8,
+          "quote": "You have a lot of issues I see!",
+          "explanation": "The agent's phrase is blaming and discourteous. The conduct policy requires agents to be courteous and avoid insults, sarcasm or blame. This matches a minor conduct violation (curt, dismissive or rude language)."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2016,
+    "output_tokens": 1231,
+    "cost_usd": 0.00297
+  },
+  "seconds": 12.5,
+  "dataset": "benchmark"
+}

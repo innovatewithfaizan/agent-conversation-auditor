@@ -1,0 +1,54 @@
+{
+  "conv_id": "10157",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent pulled the account correctly and issued a promo code; no personal/payment data or verification failures were found. The agent discouraged escalation when the customer asked to speak to a manager (grudging language), which violates the escalation policy. No other policy violations detected.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 16,
+          "quote": "I can connect you with a manager if you absolutely insist, but honestly, they just use the same system and won't have anything new to tell you.",
+          "explanation": "Customer asked to speak to a manager in turn 15. The agent’s response discourages escalation by speaking grudgingly and implying the customer's request is unnecessary, which violates the requirement to acknowledge and offer escalation without discouraging or dismissing the request."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "search_transcript",
+      "input": {
+        "query": "account has been pulled up"
+      },
+      "new_chunks": 3
+    }
+  ],
+  "usage": {
+    "calls": 2,
+    "input_tokens": 5138,
+    "output_tokens": 3710,
+    "cost_usd": 0.0087
+  },
+  "seconds": 35.3,
+  "dataset": "benchmark"
+}

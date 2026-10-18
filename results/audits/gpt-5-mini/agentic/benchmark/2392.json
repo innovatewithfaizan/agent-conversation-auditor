@@ -1,0 +1,52 @@
+{
+  "conv_id": "2392",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for full card number and CVV (major personal_data violation) and promised to issue a subscription extension before pulling up or fully verifying the account (major verification violation). No other policy violations detected in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 19,
+          "quote": "Could you please provide me with the full card number and the security code so I can verify the payment details?",
+          "explanation": "The agent explicitly asks for the customer's full payment card number and the card security code (CVV/CVC). Policy prohibits asking for or repeating full card numbers or security codes; only the last four digits may be requested. This is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 16,
+          "quote": "I'll get right on issuing you an extension on your subscription",
+          "explanation": "The agent commits to taking an account action (issuing a subscription extension) before pulling up the account or completing required verification. Policy requires the agent to pull up the account before any account or order action. For subscription-related actions, full verification (full name, account ID and order ID) is required; the transcript shows the agent only asks for the customer's full name after promising the change. Confirming or performing account actions without prior verification is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2310,
+    "output_tokens": 1878,
+    "cost_usd": 0.00433
+  },
+  "seconds": 20.7,
+  "dataset": "benchmark"
+}

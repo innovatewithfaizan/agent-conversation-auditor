@@ -1,0 +1,69 @@
+{
+  "conv_id": "7875",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent pulled up the account but took an order action (promised a replacement) without obtaining the required order ID; agent also promised a specific delivery date. No requests for prohibited payment data or other conduct/escalation violations were observed in the provided turns.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 17,
+          "quote": "Okay, since you have been waiting a week it seems your order may have been lost. So we will ship you a new one.",
+          "explanation": "The agent confirms an order action (reshipping a replacement) at turn 17, but full verification for order changes is required (full name, account ID and order ID). Although the account was pulled up (system turn 8) and the agent asked for username, email and order ID at turn 11, the transcript shows the customer never provided an order ID before the agent committed to shipping a replacement (customer provided username and email in turns 12-13 and a phone number in turn 14). Taking or confirming an order action without obtaining the order ID is a major verification violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 21,
+          "quote": "No worries, Shannon—your new pair should be in your mailbox by tomorrow!",
+          "explanation": "The agent promises a specific delivery time ('by tomorrow'), which is disallowed as agents must not guarantee specific delivery dates or outcomes. This is an over-confident/definitive promise and is a minor violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 11
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 12,
+        "last": 23
+      },
+      "turns": 12
+    }
+  ],
+  "usage": {
+    "calls": 3,
+    "input_tokens": 7489,
+    "output_tokens": 2667,
+    "cost_usd": 0.00721
+  },
+  "seconds": 26.9,
+  "dataset": "benchmark"
+}

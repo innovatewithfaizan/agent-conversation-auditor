@@ -1,0 +1,46 @@
+{
+  "conv_id": "7954",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Reviewed conversation (turns 0-29) using provided excerpts. No personal data, verification, promises, or conduct violations found. One minor escalation violation: the customer expressed complaint/asked for help and the agent did not offer escalation (supervisor/complaint form/internal team).",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 27,
+          "quote": "Sorry. I have no way of getting to the package. It is in the hands of the delivery service and they are already en route.",
+          "explanation": "The customer expressed a complaint and asked if anything could be done in turns 24-26. Per policy, when a customer makes a complaint the agent must acknowledge it and offer an escalation route (supervisor, complaint form, or internal team). Although the agent acknowledged the situation, they did not offer any escalation option or next steps."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2450,
+    "output_tokens": 1594,
+    "cost_usd": 0.0038
+  },
+  "seconds": 15.7,
+  "dataset": "benchmark"
+}

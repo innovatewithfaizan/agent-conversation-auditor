@@ -1,0 +1,51 @@
+{
+  "conv_id": "961",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent performed an address change without completing required full verification (account ID and order ID). No other policy violations detected.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I see. Okay please give me your new address.",
+          "explanation": "Agent asked for the customer's new address and proceeded with the change without completing the required full verification for address changes (full name, account ID and order ID). The agent had only collected the customer's full name (turn 7) and did not obtain an account ID or order ID before requesting and accepting the new address."
+        },
+        {
+          "turn": 22,
+          "quote": "That should do it. Is there anything else I can help you with today?",
+          "explanation": "Agent confirmed the address change without having performed the required full verification. The system log shows the order was updated with 'Change address' at turn 20, indicating an account action occurred despite incomplete verification."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2080,
+    "output_tokens": 1795,
+    "cost_usd": 0.00411
+  },
+  "seconds": 15.8,
+  "dataset": "benchmark"
+}
