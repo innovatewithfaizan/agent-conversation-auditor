@@ -1,4 +1,6 @@
 chromadb==1.5.9
+faker==40.43.0
+matplotlib==3.11.2
 numpy==2.4.6
 openai==3.35.0
 pytest==9.1.1
