@@ -3,8 +3,10 @@
     download   fetch ABCD and/or a CallCenterEN domain into data/raw/
     show       print one conversation as the auditor will see it
     stats      turn counts per dataset
+    plant      build the benchmark: plant known violations into ABCD chats (LLM)
     estimate   token and cost estimate for the audit modes (no API calls)
     audit      audit conversations with an LLM (needs an API key)
+    evaluate   score benchmark audits against the planted ground truth
 
 A dataset is "abcd" (with --split), "callcenter" (with --domain) or a path
 to a conversations .jsonl file such as the benchmark. audit skips
@@ -168,6 +170,26 @@ def cmd_audit(args) -> None:
     run_all(todo, lambda c: c.conv_id, work, args.workers)
 
 
+def cmd_plant(args) -> None:
+    from . import benchmark
+
+    backend = make_backend(args)
+    manifest = benchmark.build(args.n, args.seed, backend, verify=not args.no_verify, workers=args.workers)
+    plans = {}
+    for entry in manifest["conversations"].values():
+        plans[entry["plan"]] = plans.get(entry["plan"], 0) + 1
+    print(f"wrote {benchmark.CONVERSATIONS.relative_to(config.ROOT)} and {benchmark.MANIFEST.relative_to(config.ROOT)}: "
+          f"{plans}; generation stats {manifest['stats']}")
+
+
+def cmd_evaluate(args) -> None:
+    from . import evaluate, report
+
+    out_dir = config.RESULTS_DIR / "metrics" / args.model.replace("/", "_")
+    report.write(evaluate.run(args.model), out_dir)
+    print((out_dir / "metrics.md").read_text(encoding="utf-8"))
+
+
 def main(argv=None) -> None:
     parser = argparse.ArgumentParser(prog="auditor", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -205,6 +227,18 @@ def main(argv=None) -> None:
     p.add_argument("--effort", default=config.EFFORT, choices=["low", "medium", "high"])
     p.add_argument("--workers", type=int, default=1)
     p.set_defaults(fn=cmd_audit)
+    p = sub.add_parser("plant")
+    p.add_argument("--provider", default="groq", choices=list(llm.PROVIDERS))
+    p.add_argument("--model", default="qwen/qwen3.8-27b", help="generator; use a different family than the auditor")
+    p.add_argument("--effort", default=config.EFFORT, choices=["low", "medium", "high"])
+    p.add_argument("--n", type=int, default=80, help="chats to sample from the ABCD test split")
+    p.add_argument("--seed", type=int, default=7)
+    p.add_argument("--workers", type=int, default=2)
+    p.add_argument("--no-verify", action="store_true", help="skip the independent check of each planted item")
+    p.set_defaults(fn=cmd_plant)
+    p = sub.add_parser("evaluate")
+    p.add_argument("--model", default=config.AUDITOR_MODEL, help="whose audits to score")
+    p.set_defaults(fn=cmd_evaluate)
     args = parser.parse_args(argv)
     args.fn(args)
 

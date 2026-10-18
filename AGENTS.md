@@ -14,7 +14,7 @@ The engine is ported from an earlier project that rated films from subtitles. Th
 - [x] PR 1: this handoff file (`AGENTS.md`, `CLAUDE.md`)
 - [x] PR 2: engine port: `auditor/llm.py` (multi-provider client), `auditor/index.py` (vector store, `find_words`), `auditor/transcripts.py` (ABCD, CallCenterEN, SRT/VTT, generic JSON), `auditor/datasets.py` + CLI (`download`, `show`, `stats`), tests
 - [x] PR 3: policy and auditor: `policy/support_policy.md` (the written policy), `auditor/policy.py`, `auditor/patterns.py` (masked sensitive-data detectors), `auditor/audit.py` (modes `rag` / `agentic` / `full`, tools `read_turns` / `search_transcript` / `find_words` / `find_patterns`, strict `submit_audit`), CLI `estimate` and `audit`
-- [ ] PR 4: ground truth: violation-planting generator with a manifest, near-misses and clean controls; evaluation (recall, precision, false-positive rate on clean chats, turn localisation, severity agreement, bootstrap CIs, evidence grounding)
+- [x] PR 4: ground truth: `auditor/plant.py` + `auditor/benchmark.py` (plant violations and near-misses into ABCD chats of 24+ turns, independent re-check of each item, manifest with exact turns), `auditor/evaluate.py` + `auditor/report.py` (recall, precision, clean-chat and near-miss false alarms, turn localisation, severity agreement, weighted kappa, quote grounding, bootstrap CIs), CLI `plant` and `evaluate`
 - [ ] PR 5: pilot of about 10 chats to measure cost, then the full runs; commit results
 - [ ] PR 6: FastAPI service: list conversations, saved audits, live `POST /audit` streaming tool calls (bring-your-own-key)
 - [ ] PR 7: React frontend (Vite + React + TypeScript) following the user's Apple design skill. **Blocked: ask the user where the skill is installed**; it was not found in `~/.claude`, `~/.cursor` or `~/.agents` on 2026-10-18.
@@ -45,6 +45,14 @@ The written policy is [`policy/support_policy.md`](policy/support_policy.md): th
 The auditor (`auditor/audit.py`) returns, per category, a severity and findings `{turn, quote, explanation}`. Validation rejects turn numbers out of range, and severity `none` with findings or vice versa. Retrieval settings: 4-turn chunks, `TOP_K_CHUNKS = 1` per category for RAG (2 covered almost a whole 25-turn chat in a test), `AGENT_MAX_TOOL_CALLS = 6`.
 
 A smoke test on one untouched ABCD chat (8141, 25 turns) with Groq `openai/gpt-oss-120b`: no flags in any mode. The agentic run used `find_patterns`, `read_turns` and `search_transcript`.
+
+## Benchmark design
+
+- `python -m auditor plant --n 80 --seed 7` samples 80 ABCD test chats with at least 24 turns. 25% stay **clean**, 20% get one **near-miss** (compliant but on a policy topic), and the rest get one or two **violations**. Each violation is in a different category, with severity weighted minor 0.3 / major 0.5 / critical 0.2, and subtlety obvious or subtle.
+- The generator (default Groq `qwen/qwen3.8-27b`, a different family from the auditor) writes 1–3 turns at a chosen position. Verification problems go before the first tool action; others go after a customer turn at 30–85% of the chat. An independent judging call to the same model checks each item. Failures are regenerated once, then dropped.
+- Outputs: `data/benchmark/benchmark.jsonl` (conversations, source `benchmark`) and `data/benchmark/manifest.json` (per conversation: plan and items with `turn`, `inserted_turns`, `text`). Planting is cached in `.cache/benchmark/` and resumes after limits.
+- `python -m auditor evaluate --model <m>` writes `results/metrics/<model>/metrics.{json,md}` and `detection_by_category.png`. Unmodified ABCD chats may contain real slips, which count as false positives, so precision is a lower bound.
+- A smoke test (chat 1669) produced believable items: an obvious refund with no verification, a subtle request for the 3-digit code on the card, and a compliant "I can't promise an exact date". The judge rejected one draft.
 
 ## Decisions already made
 
