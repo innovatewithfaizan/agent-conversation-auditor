@@ -1,0 +1,28 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Node / frontend
+node_modules/
+dist/
+.vite/
+
+# Local caches (vector store, embedding model, downloaded datasets)
+.cache/
+data/raw/
+
+# Local-only folders
+_moved_copies/
+
+# OS and editors
+.DS_Store
+.idea/
