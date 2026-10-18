@@ -7,6 +7,7 @@
     estimate   token and cost estimate for the audit modes (no API calls)
     audit      audit conversations with an LLM (needs an API key)
     evaluate   score benchmark audits against the planted ground truth
+    export-web write the static JSON the web app reads (web/public/data/)
 
 A dataset is "abcd" (with --split), "callcenter" (with --domain) or a path
 to a conversations .jsonl file such as the benchmark. audit skips
@@ -196,6 +197,15 @@ def cmd_evaluate(args) -> None:
     print((out_dir / "metrics.md").read_text(encoding="utf-8"))
 
 
+def cmd_export(args) -> None:
+    from . import export
+
+    paths = {k: Path(v) for k, v in (("conversations", args.conversations), ("manifest", args.manifest),
+                                      ("metrics", args.metrics)) if v}
+    n = export.export(note=args.note, **paths)
+    print(f"wrote {export.WEB_DATA.relative_to(config.ROOT)} ({n} conversations)")
+
+
 def main(argv=None) -> None:
     parser = argparse.ArgumentParser(prog="auditor", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -249,6 +259,12 @@ def main(argv=None) -> None:
     p.add_argument("--conversations", help="default: data/benchmark/benchmark.jsonl")
     p.add_argument("--out", help="default: results/metrics/<model>/")
     p.set_defaults(fn=cmd_evaluate)
+    p = sub.add_parser("export-web")
+    p.add_argument("--conversations", help="default: data/benchmark/benchmark.jsonl")
+    p.add_argument("--manifest", help="default: data/benchmark/manifest.json")
+    p.add_argument("--metrics", help="one metrics.json (default: every results/metrics/*/metrics.json)")
+    p.add_argument("--note", help="a caveat shown with the results, e.g. that they come from a pilot")
+    p.set_defaults(fn=cmd_export)
     args = parser.parse_args(argv)
     args.fn(args)
 

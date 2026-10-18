@@ -15,6 +15,7 @@ import queue
 import threading
 import uuid
 from functools import lru_cache
+from pathlib import Path
 
 import openai
 from fastapi import FastAPI, Header, HTTPException, UploadFile
@@ -41,11 +42,14 @@ app.add_middleware(
 
 @lru_cache(maxsize=1)
 def bench() -> tuple[dict, dict]:
-    """(conversations by id, manifest); empty when the benchmark is not built."""
-    if not benchmark.CONVERSATIONS.exists() or not benchmark.MANIFEST.exists():
+    """(conversations by id, manifest); empty when the benchmark is not built.
+    AUDITOR_CONVERSATIONS and AUDITOR_MANIFEST can point at another set, such as the pilot."""
+    convs_path = Path(os.environ.get("AUDITOR_CONVERSATIONS", benchmark.CONVERSATIONS))
+    manifest_path = Path(os.environ.get("AUDITOR_MANIFEST", benchmark.MANIFEST))
+    if not convs_path.exists() or not manifest_path.exists():
         return {}, {"conversations": {}}
-    convs = {c.conv_id: c for c in transcripts.load_jsonl(benchmark.CONVERSATIONS)}
-    return convs, benchmark.load_manifest()
+    convs = {c.conv_id: c for c in transcripts.load_jsonl(convs_path)}
+    return convs, benchmark.load_manifest(manifest_path)
 
 
 def audit_summaries() -> dict[str, dict[str, dict[str, list[str]]]]:
@@ -77,7 +81,7 @@ def store() -> index.Store:
 @app.get("/api/health")
 def health() -> dict:
     convs, _ = bench()
-    return {"ok": True, "benchmark_conversations": len(convs)}
+    return {"ok": True, "benchmark_conversations": len(convs), "dev_keys": DEV_ENV_KEYS}
 
 
 @app.get("/api/policy")
@@ -167,6 +171,8 @@ def resolve_key(provider: str, header_key: str | None, dev: bool | None = None) 
 def safe_error(exc: Exception, key: str) -> str:
     if isinstance(exc, openai.AuthenticationError):
         return "The provider rejected that API key."
+    if isinstance(exc, openai.BadRequestError) and "tool_use_failed" in str(exc):
+        return "The model kept producing an invalid tool call. Try again, or pick another model."
     if isinstance(exc, openai.RateLimitError):
         return "The provider's rate limit was hit. Wait a minute, or try the RAG mode (fewer tokens)."
     text = f"{type(exc).__name__}: {exc}"
