@@ -1,6 +1,7 @@
 """The policy the auditor checks against: categories, severity scale and the
 written policy text (policy/support_policy.md, the single source of truth)."""
 
+import re
 from functools import lru_cache
 
 from . import config
@@ -31,6 +32,17 @@ CATEGORY_QUERIES = {
 @lru_cache(maxsize=1)
 def policy_text() -> str:
     return (config.ROOT / "policy" / "support_policy.md").read_text(encoding="utf-8")
+
+
+def section(category: str) -> str:
+    """The policy's opening paragraphs plus one category's section."""
+    text = policy_text()
+    parts = re.split(r"(?m)^## ", text)
+    intro = parts[0].strip()
+    match = next((p for p in parts[1:] if f"(`{category}`)" in p.splitlines()[0]), None)
+    if match is None:
+        raise KeyError(category)
+    return f"{intro}\n\n## {match.strip()}"
 
 
 def worst(severities: list[str]) -> str:

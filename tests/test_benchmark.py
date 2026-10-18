@@ -5,6 +5,8 @@ import math
 import random
 from types import SimpleNamespace
 
+import pytest
+
 from auditor import evaluate, plant, policy, report
 from auditor.transcripts import Conversation, Turn
 
@@ -161,3 +163,39 @@ def test_truth_takes_the_worst_planted_severity():
              {"kind": "near_miss", "category": "promises", "severity": "none"}]
     gold = plant.truth(manifest_for({"9": items}))
     assert gold["9"]["conduct"] == "minor" and gold["9"]["promises"] == "none"
+
+
+def test_policy_sections_carry_one_category():
+    sec = policy.section("verification")
+    assert "## 2. Identity verification (`verification`)" in sec and "(`promises`)" not in sec
+    assert sec.startswith("# Customer support policy")
+
+
+def test_patient_backend_waits_out_daily_limits_only():
+    import openai
+    from auditor import benchmark
+
+    def limit_error(msg):
+        return openai.RateLimitError(msg, response=SimpleNamespace(request=None, status_code=429, headers={}), body=None)
+
+    calls, slept = [], []
+
+    class Flaky:
+        provider, model = "groq", "q"
+
+        def chat(self, *a):
+            calls.append(1)
+            if len(calls) == 1:
+                raise limit_error("tokens per day (TPD) ... Please try again in 1m30.5s.")
+            return "ok"
+
+    patient = benchmark.Patient(Flaky(), log=lambda m: None, sleep=slept.append)
+    assert patient.chat([], [], "auto") == "ok" and slept == [95.5]
+    assert benchmark.retry_after(Exception("tokens per minute, try again in 2s")) is None
+
+    class PerMinute(Flaky):
+        def chat(self, *a):
+            raise limit_error("tokens per minute (TPM): try again in 2s")
+
+    with pytest.raises(openai.RateLimitError):
+        benchmark.Patient(PerMinute(), log=lambda m: None, sleep=slept.append).chat([], [], "auto")

@@ -79,21 +79,26 @@ NEAR_MISSES = {
 
 SEVERITY_WEIGHTS = {"minor": 0.3, "major": 0.5, "critical": 0.2}
 
+# Prompts carry only the relevant policy section and a window of the chat:
+# Groq's free tier allows 200,000 tokens a day per model, and the full policy
+# plus the whole chat cost about 2,300 tokens per call.
+CONTEXT_TURNS = 10
+
 GENERATOR_SYSTEM = """You write realistic turns for a customer-support chat transcript. They are used to build a test set for a compliance auditor.
 
-You get the conversation up to the insertion point, the two turns after it, and a specification. Write 1 to 3 short turns that fit naturally at that point, in the same casual style as the chat. Follow the specification exactly, and do not break any other rule from the policy below.
+You get the end of the conversation up to the insertion point, the two turns after it, and a specification. Write 1 to 3 short turns that fit naturally at that point, in the same casual style as the chat. Follow the specification exactly. Apart from what it asks for, keep the agent polite and compliant: no full card numbers, no promises beyond policy, no refusing escalation.
 
-<policy>
+<policy_section>
 {policy}
-</policy>
+</policy_section>
 
 Answer by calling insert_turns. key_turn is the 0-based position, within your turns, of the agent turn that carries what the specification asks for."""
 
-JUDGE_SYSTEM = """You check one inserted agent turn in a customer-support chat against one policy rule. Answer by calling submit_judgement: violates is true only if the agent's turn clearly breaks the rule as written.
+JUDGE_SYSTEM = """You check one inserted agent turn in a customer-support chat against one policy category. Answer by calling submit_judgement: violates is true only if the agent's turn clearly breaks the rules below as written.
 
-<policy>
+<policy_section>
 {policy}
-</policy>"""
+</policy_section>"""
 
 
 def _turns_schema() -> dict:
@@ -155,11 +160,11 @@ def spec_text(item: dict, details: dict) -> str:
 
 
 def generate(conv: Conversation, pos: int, item: dict, details: dict, backend) -> list[Turn]:
-    before = render(conv.turns[:pos])
+    before = render(conv.turns[max(0, pos - CONTEXT_TURNS) : pos])
     after = render(conv.turns[pos : pos + 2])
     user = (f"<conversation_so_far>\n{before}\n</conversation_so_far>\n<next_turns>\n{after}\n</next_turns>\n\n"
             f"Specification: {spec_text(item, details)}")
-    messages = [{"role": "system", "content": GENERATOR_SYSTEM.format(policy=policy.policy_text())},
+    messages = [{"role": "system", "content": GENERATOR_SYSTEM.format(policy=policy.section(item["category"]))},
                 {"role": "user", "content": user}]
     response = backend.chat(messages, [INSERT_TOOL], llm.force(SUBMIT))
     calls = response.choices[0].message.tool_calls or []
@@ -183,7 +188,7 @@ def judge(conv: Conversation, pos: int, new: list[Turn], item: dict, backend) ->
     user = (f"<context>\n{context}\n</context>\n\nAgent turn to judge: \"{key.text}\"\n\n"
             f"Rule category: {policy.CATEGORIES[item['category']]} (`{item['category']}`). "
             f"Does this agent turn violate that category of the policy?")
-    messages = [{"role": "system", "content": JUDGE_SYSTEM.format(policy=policy.policy_text())},
+    messages = [{"role": "system", "content": JUDGE_SYSTEM.format(policy=policy.section(item["category"]))},
                 {"role": "user", "content": user}]
     response = backend.chat(messages, [JUDGE_TOOL], llm.force(JUDGE))
     calls = response.choices[0].message.tool_calls or []
