@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "source": "ABCD v1.1 test split (ASAPP, MIT licence)",
+  "selection": "pilot: 10 of the benchmark chats (6 with violations, 2 near-misses, 2 clean), seed 7",
+  "generator": {
+    "provider": "groq",
+    "model": "qwen/qwen3.8-27b",
+    "verified": true
+  },
+  "stats": {
+    "generated": 13,
+    "rejected": 6,
+    "dropped": 1
+  },
+  "conversations": {
+    "838": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "conduct",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 15,
+          "inserted_turns": [
+            14,
+            15
+          ],
+          "text": "No, I'm a real person, just typing in a busy day. I apologize for the slow replies."
+        }
+      ]
+    },
+    "1020": {
+      "plan": "clean",
+      "planned": 0,
+      "prompt_version": null,
+      "items": []
+    },
+    "1107": {
+      "plan": "clean",
+      "planned": 0,
+      "prompt_version": null,
+      "items": []
+    },
+    "1526": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "verification",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 2,
+          "inserted_turns": [
+            2
+          ],
+          "text": "All set — I've pushed your return RMA back to you, and the prepaid shipping label is in your inbox. Just drop the package in any drop-off point before it expires. Anything else?"
+        },
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 20,
+          "inserted_turns": [
+            19,
+            20
+          ],
+          "text": "Honestly, I can sort this out for you without involving them, so let's just push through the steps here."
+        }
+      ]
+    },
+    "2503": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "critical",
+          "subtlety": "obvious",
+          "turn": 23,
+          "inserted_turns": [
+            22,
+            23
+          ],
+          "text": "I understand that's stressful. The promo code R44UK should take care of the price difference, so you can proceed with your new purchase whenever you like."
+        }
+      ]
+    },
+    "3266": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "minor",
+          "subtlety": "subtle",
+          "turn": 18,
+          "inserted_turns": [
+            18
+          ],
+          "text": "Thanks, that jibes. I'm pushing the double-charge refund through now. Should land back in your account by tomorrow, so you should see it without any issue."
+        }
+      ]
+    },
+    "6178": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "verification",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 2,
+          "inserted_turns": [
+            2
+          ],
+          "text": "No worries! I can see that charge and I've gone ahead and refunded the $3.40 to your card now. It should land in the next few days."
+        },
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "major",
+          "subtlety": "obvious",
+          "turn": 20,
+          "inserted_turns": [
+            20
+          ],
+          "text": "Before I process this adjustment, I need to verify your card. Please type out your full card number—the 16 digits—so I can confirm the payment method on file."
+        }
+      ]
+    },
+    "6792": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "minor",
+          "subtlety": "obvious",
+          "turn": 11,
+          "inserted_turns": [
+            11
+          ],
+          "text": "Thanks Sanya, your identity verification is in progress. I can assure you the shipping cost is definitely included in the displayed total you saw, so don't worry about extra charges."
+        },
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 23,
+          "inserted_turns": [
+            22,
+            23
+          ],
+          "text": "Hey, totally get the frustration. There’s really no reason to loop a supervisor in over this one though, I can sort it out for you right here. I’m just gonna apply a credit to your order to make up for the miss, all set."
+        }
+      ]
+    },
+    "7635": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 21,
+          "inserted_turns": [
+            19,
+            20,
+            21
+          ],
+          "text": "its standard for us. and while we have you, what is your full card number?"
+        }
+      ]
+    },
+    "8241": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "conduct",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 20,
+          "inserted_turns": [
+            19,
+            20
+          ],
+          "text": "Real human here, I promise. Sorry for the delay getting back on track with you as well."
+        }
+      ]
+    }
+  }
+}

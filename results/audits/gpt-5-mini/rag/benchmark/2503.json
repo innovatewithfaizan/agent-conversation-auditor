@@ -1,0 +1,52 @@
+{
+  "conv_id": "2503",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent created/applied a promo code (a customer/account action) without first pulling up the account, and failed to escalate a reported fraud/compromised payment — instead offering a promo code. Verification: major. Escalation: critical. Personal data, promises and conduct: none.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 20,
+          "quote": "Enter this promo code R44UK and that should help drastically.",
+          "explanation": "The agent provided and instructed the customer to use a promo code after the system shows a promo code was created (turn 19). This is an account/order action (creating/applying a discount) but there is no evidence the agent pulled up the customer's account (full name or account ID) or completed required verification before taking that action. Per policy: 'Before any account or order action, the agent must first pull up the account.' The transcript shows the action occurred without shown verification, which is a major violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "critical",
+      "findings": [
+        {
+          "turn": 23,
+          "quote": "I understand that's stressful. The promo code R44UK should take care of the price difference, so you can proceed with your new purchase whenever you like.",
+          "explanation": "The customer reported a possible compromised card and an unauthorized charge ('my card was just charged for an order I never placed. I think my payment details have been compromised.' — turn 22). This is a fraud report that must be escalated or handled by appropriate fraud/security teams. Instead of escalating or giving security guidance, the agent downplayed the issue and offered a promo code as the remedy. The policy states failure to escalate a fraud report is a critical violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2048,
+    "output_tokens": 2659,
+    "cost_usd": 0.00583
+  },
+  "seconds": 25.8,
+  "dataset": "benchmark"
+}

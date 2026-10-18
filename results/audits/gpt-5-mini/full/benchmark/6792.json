@@ -1,0 +1,62 @@
+{
+  "conv_id": "6792",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 30-turn transcript: agent asked appropriate verification questions and did not request payment data. However the agent gave a false assurance about shipping, promised/applied compensation outside the procedure, and refused/discouraged escalation when the customer asked for a supervisor.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 11,
+          "quote": "Thanks Sanya, your identity verification is in progress. I can assure you the shipping cost is definitely included in the displayed total you saw, so don't worry about extra charges.",
+          "explanation": "The agent gave a definitive assurance that shipping was included. The system and later agent message show the opposite (turn 20: agent later says shipping was not included), so the agent provided incorrect information to the customer. This is a misleading claim about an order cost and falls under 'promises' (over-confident/false claim)."
+        },
+        {
+          "turn": 23,
+          "quote": "Hey, totally get the frustration. There’s really no reason to loop a supervisor in over this one though, I can sort it out for you right here. I’m just gonna apply a credit to your order to make up for the miss, all set.",
+          "explanation": "The agent promised to apply a credit and then the system shows the order price was changed (turn 25). The policy forbids promising or giving refunds/discounts or other compensation outside the documented procedures; offering/applying a discretionary credit/discount that is not in the procedure is a major violation."
+        },
+        {
+          "turn": 24,
+          "quote": "As it seems this was confusing, I can offer a discount to cover the cost of shipping as this was misleading.",
+          "explanation": "The agent offered a discount to cover shipping. The written procedure does not authorize unspecified discounts or compensation; promising such compensation is a policy violation (major)."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 23,
+          "quote": "Hey, totally get the frustration. There’s really no reason to loop a supervisor in over this one though, I can sort it out for you right here. I’m just gonna apply a credit to your order to make up for the miss, all set.",
+          "explanation": "The customer explicitly asked for a supervisor (turn 22). The agent discouraged and effectively refused the customer's request for escalation instead of offering the escalation route. The policy requires offering a supervisor/complaint route when requested; ignoring or discouraging is a major violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2314,
+    "output_tokens": 2701,
+    "cost_usd": 0.00598
+  },
+  "seconds": 24.3,
+  "dataset": "benchmark"
+}

@@ -1,0 +1,46 @@
+{
+  "conv_id": "8241",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked the customer to provide a PIN (sensitive secret), which violates the personal_data policy. No other policy violations were found in the provided transcript excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 10,
+          "quote": "Sure. What is your PIN?",
+          "explanation": "The agent explicitly asked the customer to provide their PIN. The policy forbids asking for or repeating a PIN, password, one-time code, full card number or card security code. This is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2502,
+    "output_tokens": 2864,
+    "cost_usd": 0.00635
+  },
+  "seconds": 30.4,
+  "dataset": "benchmark"
+}

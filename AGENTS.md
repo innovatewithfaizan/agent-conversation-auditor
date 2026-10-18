@@ -15,7 +15,8 @@ The engine is ported from an earlier project that rated films from subtitles. Th
 - [x] PR 2: engine port: `auditor/llm.py` (multi-provider client), `auditor/index.py` (vector store, `find_words`), `auditor/transcripts.py` (ABCD, CallCenterEN, SRT/VTT, generic JSON), `auditor/datasets.py` + CLI (`download`, `show`, `stats`), tests
 - [x] PR 3: policy and auditor: `policy/support_policy.md` (the written policy), `auditor/policy.py`, `auditor/patterns.py` (masked sensitive-data detectors), `auditor/audit.py` (modes `rag` / `agentic` / `full`, tools `read_turns` / `search_transcript` / `find_words` / `find_patterns`, strict `submit_audit`), CLI `estimate` and `audit`
 - [x] PR 4: ground truth: `auditor/plant.py` + `auditor/benchmark.py` (plant violations and near-misses into ABCD chats of 24+ turns, independent re-check of each item, manifest with exact turns), `auditor/evaluate.py` + `auditor/report.py` (recall, precision, clean-chat and near-miss false alarms, turn localisation, severity agreement, weighted kappa, quote grounding, bootstrap CIs), CLI `plant` and `evaluate`
-- [ ] PR 5: pilot of about 10 chats to measure cost, then the full runs; commit results
+- [x] PR 5: free-tier fixes (output cap, shorter planting prompts, waiting out daily limits), policy calibration after the pilot, the 10-chat gpt-5-mini pilot in `results/pilot/`
+- [ ] PR 9: finished benchmark (`data/benchmark/`) and the full gpt-5-mini run. **Needs the owner's OK for the paid run** (about $1.20 more; see the status notes below)
 - [ ] PR 6: FastAPI service: list conversations, saved audits, live `POST /audit` streaming tool calls (bring-your-own-key)
 - [ ] PR 7: React frontend (Vite + React + TypeScript) following the user's Apple design skill. **Blocked: ask the user where the skill is installed**; it was not found in `~/.claude`, `~/.cursor` or `~/.agents` on 2026-10-18.
 - [ ] PR 8: README for three audiences (business, newcomer, senior engineer), deployment (static frontend on GitHub Pages, API on Render or Hugging Face Spaces)
@@ -53,6 +54,24 @@ A smoke test on one untouched ABCD chat (8141, 25 turns) with Groq `openai/gpt-o
 - Outputs: `data/benchmark/benchmark.jsonl` (conversations, source `benchmark`) and `data/benchmark/manifest.json` (per conversation: plan and items with `turn`, `inserted_turns`, `text`). Planting is cached in `.cache/benchmark/` and resumes after limits.
 - `python -m auditor evaluate --model <m>` writes `results/metrics/<model>/metrics.{json,md}` and `detection_by_category.png`. Unmodified ABCD chats may contain real slips, which count as false positives, so precision is a lower bound.
 - A smoke test (chat 1669) produced believable items: an obvious refund with no verification, a subtle request for the 3-digit code on the card, and a compliant "I can't promise an exact date". The judge rejected one draft.
+
+## Status notes (2026-10-18, overnight)
+
+- **Groq free-tier limits** (from response headers and errors): `qwen/qwen3.8-27b` allows 7,000 input and **1,000 output tokens a minute** and **200,000 tokens a day**. Requests whose output cap exceeds 1,000 are refused outright, hence `Backend.max_tokens` and `plant --max-tokens 600`. `openai/gpt-oss-120b` allows 8,000 tokens a minute; its daily cap was not measured. A full free-tier audit of 80 chats in 3 modes (~1.3M tokens) is not feasible in a day.
+- **Planting** hit Qwen's daily cap after about 30 chats. Prompts now carry one policy section and a 10-turn window (`PROMPT_VERSION = "v2-section"`; earlier chats are `v1-full-policy`, recorded per chat in the manifest). `benchmark.Patient` waits out daily-limit 429s, so `python -m auditor plant --n 80 --seed 7 --workers 1` runs unattended and resumes from `.cache/benchmark/`.
+- **Pilot** (10 benchmark chats: 6 with violations, 2 near-misses, 2 clean; gpt-5-mini, effort medium), scored with `python -m auditor evaluate --model gpt-5-mini --manifest results/pilot/manifest.json --conversations results/pilot/conversations.jsonl --out results/pilot`:
+  - **Recall:** full transcript 100%, RAG 67%, agentic 67%.
+  - **Precision:** 50% / 40% / 38%.
+  - **Near-miss false alarms:** 0%.
+  - **Quotes found in the cited turn:** 100%.
+  - **Cost:** $0.19 for 30 audits, about $0.017 per chat for all three modes.
+- **Calibration** (from the first pilot pass, kept in `.cache/audits_v1/`, not committed):
+  - The verification rule had been stricter than ABCD's handbook (adding or removing a subscription service only needs the account pulled up), so it now follows the handbook per flow.
+  - The auditor now files each problem under one category and does not call completed actions misleading without evidence.
+  - Effect: precision 41% → 50% (full transcript), near-miss false alarms 50% → 0%.
+  - Do not tune further on the benchmark: the other 70 chats must stay unseen.
+- **Clean-chat flags** that remain look like real handbook gaps by the original human agents, for example payment taken in a subscription flow without the order ID. Precision on unmodified chats is a lower bound.
+- **Spend:** about $1.43 of the owner's $4 OpenAI credit ($1.07 film project + $0.36 pilots). The full gpt-5-mini run on the remaining 70 chats is estimated at about $1.20 (total about $2.65), over the ~$2 line, so ask first.
 
 ## Decisions already made
 
