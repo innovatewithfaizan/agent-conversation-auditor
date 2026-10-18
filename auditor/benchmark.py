@@ -89,7 +89,8 @@ def build(n: int, seed: int, backend, verify: bool = True, workers: int = 2, log
             meta = {**{k: v for k, v in conv.meta.items() if k != "scenario"}, "abcd_id": conv.conv_id}
             new, items, stats = transcripts.Conversation(cid, "benchmark", conv.turns, meta), [], {}
         rec = {"conversation": transcripts.to_dict(new), "planned": planned, "items": items, "stats": stats,
-               "prompt_version": PROMPT_VERSION if planned else None}
+               "prompt_version": PROMPT_VERSION if planned else None,
+               "generator": backend.model if planned else None}
         with lock:
             cached.write_text(json.dumps(rec, ensure_ascii=False), encoding="utf-8")
         return rec
@@ -121,10 +122,15 @@ def build(n: int, seed: int, backend, verify: bool = True, workers: int = 2, log
         "created": datetime.date.today().isoformat(),
         "source": "ABCD v1.1 test split (ASAPP, MIT licence)",
         "selection": f"{len(order)} chats with at least {MIN_TURNS} turns, seed {seed}",
-        "generator": {"provider": backend.provider, "model": backend.model, "verified": verify},
+        # Early chats were planted by qwen/qwen3.8-27b; chats record their own generator.
+        "generator": {"provider": backend.provider, "verified": verify,
+                      "model": " + ".join(sorted({results[c].get("generator") or "qwen/qwen3.8-27b"
+                                                  for c in order if results[c]["planned"]}))},
         "stats": totals,
         "conversations": {c: {"plan": plant.plan_label(results[c]["items"]), "planned": len(results[c]["planned"]),
                               "prompt_version": results[c].get("prompt_version", "v1-full-policy")
+                              if results[c]["planned"] else None,
+                              "generator": (results[c].get("generator") or "qwen/qwen3.8-27b")
                               if results[c]["planned"] else None,
                               "items": results[c]["items"]} for c in order},
     }
