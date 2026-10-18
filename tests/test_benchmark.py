@@ -155,7 +155,9 @@ def test_report_markdown_and_figure(tmp_path):
     md = (tmp_path / "metrics.md").read_text()
     assert "| Full transcript | **100%**" in md and "Commitments and claims" in md
     assert (tmp_path / "detection_by_category.png").stat().st_size > 1000
-    assert json.loads((tmp_path / "metrics.json").read_text())["conversations_compared"] == 2
+    saved = json.loads((tmp_path / "metrics.json").read_text())  # strict JSON: no NaN
+    assert saved["conversations_compared"] == 2
+    assert saved["modes"]["full"]["categories"]["conduct"]["recall"] is None  # nothing planted there
 
 
 def test_truth_takes_the_worst_planted_severity():

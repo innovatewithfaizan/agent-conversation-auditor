@@ -18,7 +18,7 @@ The engine is ported from an earlier project that rated films from subtitles. Th
 - [x] PR 5: free-tier fixes (output cap, shorter planting prompts, waiting out daily limits), policy calibration after the pilot, the 10-chat gpt-5-mini pilot in `results/pilot/`
 - [ ] PR 9: finished benchmark (`data/benchmark/`) and the full gpt-5-mini run. **Needs the owner's OK for the paid run** (about $1.20 more; see the status notes below)
 - [x] PR 6: FastAPI service `auditor/api.py`: `/api/health`, `/api/policy`, `/api/providers`, `/api/conversations` (with per-model, per-mode flag summaries), `/api/conversations/{id}`, `/api/metrics`, `/api/parse` (upload, 2 MB), `/api/audit` (server-sent events: `start`, `tool`, `result`, `error`; key in the `X-Provider-Key` header; listed models only; `AUDITOR_DEV_ENV_KEYS=1` for local env keys; CORS from `AUDITOR_CORS_ORIGINS`)
-- [ ] PR 7: React frontend (Vite + React + TypeScript) following the user's Apple design skill. **Blocked: ask the user where the skill is installed**; it was not found in `~/.claude`, `~/.cursor` or `~/.agents` on 2026-10-18.
+- [x] PR 7: React app in `web/` (Vite + React 18 + TypeScript, hash routing): Overview (metrics tiles, recall chart, table), Conversations (filter by plan, caught/missed/extra per mode), Conversation detail (message-style transcript, planted and flagged turns, findings that jump to their turn, the agent's tool calls), Live audit (bring-your-own-key, streamed tool calls; disabled on the static site), Policy. Static data via `python -m auditor export-web` into `web/public/data/` (currently the pilot). **Design follows Apple's Human Interface Guidelines from general knowledge, because the owner's "Apple design" skill was not found** (`~/.claude`, `~/.cursor`, `~/.agents`, claude.ai skills). Restyle with the skill once its location is known; tokens live in `web/src/styles.css`.
 - [ ] PR 8: README for three audiences (business, newcomer, senior engineer), deployment (static frontend on GitHub Pages, API on Render or Hugging Face Spaces)
 
 ## Data plan
@@ -107,6 +107,11 @@ A smoke test on one untouched ABCD chat (8141, 25 turns) with Groq `openai/gpt-o
 .venv/bin/python -m auditor estimate data/benchmark/conversations.jsonl --model gpt-5-mini
 .venv/bin/python -m auditor audit abcd --limit 5 --mode agentic --provider groq --model openai/gpt-oss-120b
 AUDITOR_DEV_ENV_KEYS=1 .venv/bin/uvicorn auditor.api:app --port 8000   # local API; dev flag lets it use .env keys
+AUDITOR_CONVERSATIONS=results/pilot/conversations.jsonl AUDITOR_MANIFEST=results/pilot/manifest.json AUDITOR_DEV_ENV_KEYS=1 AUDITOR_CORS_ORIGINS=http://localhost:5174 .venv/bin/uvicorn auditor.api:app --port 8000
+.venv/bin/python -m auditor export-web --conversations results/pilot/conversations.jsonl --manifest results/pilot/manifest.json --metrics results/pilot/metrics.json --note "Pilot: ..."
+cd web && npm ci && npm test && npm run build          # static site in web/dist
+cd web && npm run dev                                  # static mode on :5173
+cd web && VITE_API_URL=http://localhost:8000 npx vite --port 5174   # live mode against the local API
 .venv/bin/python -m auditor download abcd
 .venv/bin/python -m auditor download callcenter --domain medical_equipment_outbound
 .venv/bin/python -m auditor stats abcd --split test

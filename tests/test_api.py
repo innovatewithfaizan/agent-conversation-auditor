@@ -39,7 +39,7 @@ def client(monkeypatch, tmp_path):
 
 
 def test_read_endpoints(client):
-    assert client.get("/api/health").json() == {"ok": True, "benchmark_conversations": 1}
+    assert client.get("/api/health").json() == {"ok": True, "benchmark_conversations": 1, "dev_keys": False}
     pol = client.get("/api/policy").json()
     assert "verification" in pol["categories"] and "Identity verification" in pol["text"]
     assert "groq" in client.get("/api/providers").json()

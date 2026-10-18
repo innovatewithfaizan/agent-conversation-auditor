@@ -101,9 +101,21 @@ def figure(report: dict, path) -> None:
     plt.close(fig)
 
 
+def json_safe(obj):
+    """Replace NaN (undefined rates, such as precision with no flags) with None,
+    because NaN is not valid JSON and browsers reject it."""
+    if isinstance(obj, float) and math.isnan(obj):
+        return None
+    if isinstance(obj, dict):
+        return {k: json_safe(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [json_safe(v) for v in obj]
+    return obj
+
+
 def write(report: dict, out_dir=None) -> None:
     out_dir = out_dir or config.RESULTS_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / "metrics.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    (out_dir / "metrics.json").write_text(json.dumps(json_safe(report), indent=2, allow_nan=False), encoding="utf-8")
     (out_dir / "metrics.md").write_text(markdown(report), encoding="utf-8")
     figure(report, out_dir / "detection_by_category.png")

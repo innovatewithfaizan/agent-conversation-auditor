@@ -113,15 +113,23 @@ class Backend:
             return {"reasoning_format": "hidden"}  # required with tool calls on Groq
         return {}
 
-    def chat(self, messages: list[dict], tools: list[dict], tool_choice) -> object:
-        return self._client.chat.completions.create(
-            model=self.model,
-            messages=messages,
-            tools=tools,
-            tool_choice=tool_choice,
-            max_completion_tokens=self.max_tokens,
-            extra_body=self.extra_body(),
-        )
+    def chat(self, messages: list[dict], tools: list[dict], tool_choice, attempts: int = 3) -> object:
+        """One chat completion. Groq rejects a reply whose tool-call arguments are
+        not valid JSON with a 400 (tool_use_failed) instead of returning it; a
+        fresh generation usually succeeds, so that error is retried."""
+        for attempt in range(attempts):
+            try:
+                return self._client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    tools=tools,
+                    tool_choice=tool_choice,
+                    max_completion_tokens=self.max_tokens,
+                    extra_body=self.extra_body(),
+                )
+            except openai.BadRequestError as exc:
+                if "tool_use_failed" not in str(exc) or attempt == attempts - 1:
+                    raise
 
 
 def function_tool(name: str, description: str, parameters: dict) -> dict:
