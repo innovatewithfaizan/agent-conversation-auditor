@@ -32,7 +32,7 @@ def markdown(report: dict) -> str:
     out = ["# Evaluation results", "",
            f"`{report['model']}` audits of the benchmark: {report['conversations_compared']} conversations, "
            f"every mode scored on the same ones. Ground truth is the planted violations in "
-           f"`data/benchmark/manifest.json`.", "",
+           f"`{report.get('ground_truth_file', 'data/benchmark/manifest.json')}`.", "",
            "## Overall", "",
            "| Method | Recall | 95% CI | Precision | 95% CI | F1 | Clean chats flagged | Near-miss false alarms | "
            "Finding cites the planted turn | Severity exact | Weighted κ | Quotes found in cited turn | "

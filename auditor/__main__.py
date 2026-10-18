@@ -186,8 +186,13 @@ def cmd_plant(args) -> None:
 def cmd_evaluate(args) -> None:
     from . import evaluate, report
 
-    out_dir = config.RESULTS_DIR / "metrics" / args.model.replace("/", "_")
-    report.write(evaluate.run(args.model), out_dir)
+    out_dir = Path(args.out) if args.out else config.RESULTS_DIR / "metrics" / args.model.replace("/", "_")
+    manifest = json.loads(Path(args.manifest).read_text(encoding="utf-8")) if args.manifest else None
+    convs = Path(args.conversations) if args.conversations else None
+    rep = evaluate.run(args.model, manifest=manifest, convs_path=convs)
+    if args.manifest:
+        rep["ground_truth_file"] = args.manifest
+    report.write(rep, out_dir)
     print((out_dir / "metrics.md").read_text(encoding="utf-8"))
 
 
@@ -240,6 +245,9 @@ def main(argv=None) -> None:
     p.set_defaults(fn=cmd_plant)
     p = sub.add_parser("evaluate")
     p.add_argument("--model", default=config.AUDITOR_MODEL, help="whose audits to score")
+    p.add_argument("--manifest", help="default: data/benchmark/manifest.json")
+    p.add_argument("--conversations", help="default: data/benchmark/benchmark.jsonl")
+    p.add_argument("--out", help="default: results/metrics/<model>/")
     p.set_defaults(fn=cmd_evaluate)
     args = parser.parse_args(argv)
     args.fn(args)
