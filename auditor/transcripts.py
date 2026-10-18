@@ -185,6 +185,32 @@ def parse_upload(name: str, data: bytes, conv_id: str = "upload") -> Conversatio
     return Conversation(conv_id, "upload", turns, {"filename": name})
 
 
+# JSONL (our own format, used for the benchmark) -----------------------------
+
+def to_dict(conv: Conversation) -> dict:
+    return {"conv_id": conv.conv_id, "source": conv.source, "meta": conv.meta,
+            "turns": [{"idx": t.idx, "speaker": t.speaker, "text": t.text, "start": t.start} for t in conv.turns]}
+
+
+def from_dict(d: dict) -> Conversation:
+    turns = [Turn(t["idx"], t["speaker"], t["text"], t.get("start", "")) for t in d["turns"]]
+    if [t.idx for t in turns] != list(range(len(turns))):
+        raise ValueError(f"{d['conv_id']}: turns must be numbered 0..n-1")
+    return Conversation(str(d["conv_id"]), d["source"], turns, d.get("meta", {}))
+
+
+def save_jsonl(convs: list[Conversation], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fh:
+        for c in convs:
+            fh.write(json.dumps(to_dict(c), ensure_ascii=False) + "\n")
+
+
+def load_jsonl(path: Path) -> list[Conversation]:
+    with open(path, encoding="utf-8") as fh:
+        return [from_dict(json.loads(line)) for line in fh if line.strip()]
+
+
 # Rendering and chunking -----------------------------------------------------
 
 def turn_line(t: Turn) -> str:
