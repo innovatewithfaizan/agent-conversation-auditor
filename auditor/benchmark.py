@@ -26,7 +26,8 @@ def _rng(seed: int, conv_id: str) -> random.Random:
     return random.Random(int(digest[:16], 16))
 
 
-def build(n: int, seed: int, backend, verify: bool = True, workers: int = 2, log=print) -> dict:
+def build(n: int, seed: int, backend, verify: bool = True, workers: int = 2, log=None) -> dict:
+    log = log or (lambda msg: print(msg, flush=True))
     convs = transcripts.load_abcd(split="test")
     rng = random.Random(seed)
     chosen = plant.select_chats(convs, n, MIN_TURNS, rng)

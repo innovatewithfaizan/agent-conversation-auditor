@@ -41,3 +41,12 @@ def test_strict_function_tool_shape():
                                                     "additionalProperties": False})
     assert tool["function"]["strict"] is True and tool["function"]["name"] == "submit"
     assert llm.force("submit") == {"type": "function", "function": {"name": "submit"}}
+
+
+def test_output_cap_is_sent_with_each_request():
+    backend = llm.Backend("groq", "qwen/qwen3.8-27b", api_key="k", max_tokens=600)
+    sent = {}
+    backend._client = type("C", (), {"chat": type("Ch", (), {"completions": type("Co", (), {
+        "create": staticmethod(lambda **kw: sent.update(kw))})})})
+    backend.chat([{"role": "user", "content": "hi"}], [], "auto")
+    assert sent["max_completion_tokens"] == 600

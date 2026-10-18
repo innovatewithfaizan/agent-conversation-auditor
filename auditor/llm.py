@@ -89,6 +89,9 @@ class Backend:
     api_key: str | None = None
     effort: str = config.EFFORT
     max_prompt_tokens: int | None = None  # None: provider default, 0: no limit
+    # Output cap per request. Groq's free tier refuses requests whose cap exceeds
+    # its output-tokens-per-minute limit (1,000 for qwen/qwen3.8-27b).
+    max_tokens: int = 8000
 
     def __post_init__(self):
         spec = PROVIDERS[self.provider]
@@ -116,7 +119,7 @@ class Backend:
             messages=messages,
             tools=tools,
             tool_choice=tool_choice,
-            max_completion_tokens=8000,
+            max_completion_tokens=self.max_tokens,
             extra_body=self.extra_body(),
         )
 

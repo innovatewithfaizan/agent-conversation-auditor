@@ -174,6 +174,7 @@ def cmd_plant(args) -> None:
     from . import benchmark
 
     backend = make_backend(args)
+    backend.max_tokens = args.max_tokens
     manifest = benchmark.build(args.n, args.seed, backend, verify=not args.no_verify, workers=args.workers)
     plans = {}
     for entry in manifest["conversations"].values():
@@ -235,6 +236,7 @@ def main(argv=None) -> None:
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--workers", type=int, default=2)
     p.add_argument("--no-verify", action="store_true", help="skip the independent check of each planted item")
+    p.add_argument("--max-tokens", type=int, default=600, help="output cap per request (Groq free tier: under 1000)")
     p.set_defaults(fn=cmd_plant)
     p = sub.add_parser("evaluate")
     p.add_argument("--model", default=config.AUDITOR_MODEL, help="whose audits to score")
