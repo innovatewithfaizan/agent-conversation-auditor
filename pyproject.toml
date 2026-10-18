@@ -1,0 +1,9 @@
+[project]
+name = "agent-conversation-auditor"
+version = "0.1.0"
+description = "Agentic RAG auditor that checks call and chat transcripts against a written policy"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
