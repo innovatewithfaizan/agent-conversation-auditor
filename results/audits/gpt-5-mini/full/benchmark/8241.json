@@ -1,0 +1,46 @@
+{
+  "conv_id": "8241",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for prohibited payment/security data (PIN) during verification. No other policy violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 10,
+          "quote": "Sure. What is your PIN?",
+          "explanation": "The agent explicitly asked the customer for their PIN. The policy states: 'Never ask for, repeat or write out a password, PIN, one-time code.' Asking for a PIN is a major violation of the personal and payment data rules."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2162,
+    "output_tokens": 2923,
+    "cost_usd": 0.00639
+  },
+  "seconds": 28.8,
+  "dataset": "benchmark"
+}

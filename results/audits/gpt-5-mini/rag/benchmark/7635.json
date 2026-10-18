@@ -1,0 +1,52 @@
+{
+  "conv_id": "7635",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for full card number (PCI violation) and failed to acknowledge/offer escalation when the customer said they wanted to submit a complaint. No other policy violations found in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 21,
+          "quote": "its standard for us. and while we have you, what is your full card number?",
+          "explanation": "The agent explicitly asked for the customer's full card number. Policy forbids asking for, repeating or writing out a full payment card number or security code; this is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 15,
+          "quote": "thank you",
+          "explanation": "After the customer said they wanted to submit a complaint (turn 2), the agent did not acknowledge the complaint or offer an escalation route (supervisor/complaint form/internal team). Ignoring a request to submit a complaint is a major violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1978,
+    "output_tokens": 2250,
+    "cost_usd": 0.00499
+  },
+  "seconds": 22.4,
+  "dataset": "benchmark"
+}

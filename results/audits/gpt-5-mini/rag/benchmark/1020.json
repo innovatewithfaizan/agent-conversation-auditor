@@ -1,0 +1,51 @@
+{
+  "conv_id": "1020",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent's behavior: no personal-data, promises, escalation or conduct violations found. Major verification violation: subscription payment/renewal proceeded without the required full verification (order ID missing).",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 16,
+          "quote": "Would you like me to use the credit card on file?",
+          "explanation": "The agent asked to use the card on file to proceed with payment but did not perform full verification required for subscription payments (full name, account ID and order ID). The system shows the subscription was renewed ('Account has been updated with renew subscription.' at turn 19) without an order ID being collected."
+        },
+        {
+          "turn": 4,
+          "quote": "Can I please have your full name and account number?",
+          "explanation": "Asking for full name and account number is insufficient here because the agent completed a subscription payment/renewal (system turn 19). Per policy, full verification for subscription payments requires full name, account ID and order ID; no order ID was requested or provided in the transcript."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2070,
+    "output_tokens": 2026,
+    "cost_usd": 0.00457
+  },
+  "seconds": 23.2,
+  "dataset": "benchmark"
+}

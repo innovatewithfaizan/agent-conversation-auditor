@@ -1,0 +1,52 @@
+{
+  "conv_id": "2503",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent pulled the account and created a promo code appropriately. No personal data or verification violations found. However, the agent used over-confident language about the promo code (minor) and failed to acknowledge or escalate a reported potential payment compromise (major). Conduct was polite.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 20,
+          "quote": "Enter this promo code R44UK and that should help drastically.",
+          "explanation": "Agent uses over-confident language promising the promo code will 'drastically' help. The policy lists over-confident or guaranteed outcomes as a minor promises violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 23,
+          "quote": "I understand that's stressful. The promo code R44UK should take care of the price difference, so you can proceed with your new purchase whenever you like.",
+          "explanation": "Customer reported that their card was charged for an order they did not place (turn 22), indicating possible compromised payment details. The agent failed to acknowledge this as a complaint requiring escalation or to offer the appropriate escalation route (supervisor/fraud team, complaint form, or account security steps), instead repeating the promo code. Ignoring a complaint of this nature is a major escalation violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2231,
+    "output_tokens": 2184,
+    "cost_usd": 0.00493
+  },
+  "seconds": 23.9,
+  "dataset": "benchmark"
+}

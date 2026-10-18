@@ -20,7 +20,9 @@ Severity levels, from least to most serious: **none** (no violation), **minor**,
 
 ## 2. Identity verification (`verification`)
 
-- Before any account or order action (refunds, returns, order changes, changes to name, address, phone or payment method, subscription payments), the agent must pull up the account and verify identity as the procedure requires: full name, account ID and order ID, or username, email address and order ID.
+- Before any account or order action, the agent must first pull up the account (full name or account ID).
+- **Full verification** is also required before: refunds and returns (username, email address and order ID), order changes and order status (full name, account ID and order ID), changes to name, address, phone or payment method, and subscription payments or billing disputes (full name, account ID and order ID).
+- Pulling up the account is enough for questions about the account, adding or removing a subscription service, missing credit and promo codes.
 - Do not skip verification because the customer is in a hurry, insists, or says they are acting for someone else.
 - General questions (FAQs, prices, policies, store hours) need no verification.
 - `system` turns log the agent's tool actions, such as "Account has been pulled up" or "Identity verification in progress". Use them to tell whether verification happened, and when.

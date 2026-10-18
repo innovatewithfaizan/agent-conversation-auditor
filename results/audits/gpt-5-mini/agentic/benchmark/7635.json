@@ -1,0 +1,60 @@
+{
+  "conv_id": "7635",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent improperly requested full card number and failed to offer escalation when a complaint was requested. Verification, promises and conduct otherwise compliant based on the transcript excerpt.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 21,
+          "quote": "its standard for us. and while we have you, what is your full card number?",
+          "explanation": "The agent asked for the customer's full card number. Policy explicitly forbids asking for, repeating or writing out a full payment card number; such requests are a major violation of the personal and payment data rules."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 4,
+          "quote": "i see, i can help you with your dispute over yesterdays prce",
+          "explanation": "The customer explicitly said they wanted to submit a complaint (turn 2). When a customer makes a complaint the agent must acknowledge it and offer an escalation route (supervisor, complaint form or internal team). The agent acknowledged and proceeded to handle the dispute but did not offer any escalation option or inform the customer of how to formally escalate, which is a minor escalation violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "search_transcript",
+      "input": {
+        "query": "complaint supervisor escalate manager escalate complaint supervisor"
+      },
+      "new_chunks": 3
+    }
+  ],
+  "usage": {
+    "calls": 2,
+    "input_tokens": 4903,
+    "output_tokens": 4350,
+    "cost_usd": 0.00993
+  },
+  "seconds": 44.0,
+  "dataset": "benchmark"
+}
