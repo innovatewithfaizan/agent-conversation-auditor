@@ -17,7 +17,7 @@ The engine is ported from an earlier project that rated films from subtitles. Th
 - [x] PR 4: ground truth: `auditor/plant.py` + `auditor/benchmark.py` (plant violations and near-misses into ABCD chats of 24+ turns, independent re-check of each item, manifest with exact turns), `auditor/evaluate.py` + `auditor/report.py` (recall, precision, clean-chat and near-miss false alarms, turn localisation, severity agreement, weighted kappa, quote grounding, bootstrap CIs), CLI `plant` and `evaluate`
 - [x] PR 5: free-tier fixes (output cap, shorter planting prompts, waiting out daily limits), policy calibration after the pilot, the 10-chat gpt-5-mini pilot in `results/pilot/`
 - [ ] PR 9: finished benchmark (`data/benchmark/`) and the full gpt-5-mini run. **Needs the owner's OK for the paid run** (about $1.20 more; see the status notes below)
-- [ ] PR 6: FastAPI service: list conversations, saved audits, live `POST /audit` streaming tool calls (bring-your-own-key)
+- [x] PR 6: FastAPI service `auditor/api.py`: `/api/health`, `/api/policy`, `/api/providers`, `/api/conversations` (with per-model, per-mode flag summaries), `/api/conversations/{id}`, `/api/metrics`, `/api/parse` (upload, 2 MB), `/api/audit` (server-sent events: `start`, `tool`, `result`, `error`; key in the `X-Provider-Key` header; listed models only; `AUDITOR_DEV_ENV_KEYS=1` for local env keys; CORS from `AUDITOR_CORS_ORIGINS`)
 - [ ] PR 7: React frontend (Vite + React + TypeScript) following the user's Apple design skill. **Blocked: ask the user where the skill is installed**; it was not found in `~/.claude`, `~/.cursor` or `~/.agents` on 2026-10-18.
 - [ ] PR 8: README for three audiences (business, newcomer, senior engineer), deployment (static frontend on GitHub Pages, API on Render or Hugging Face Spaces)
 
@@ -106,6 +106,7 @@ A smoke test on one untouched ABCD chat (8141, 25 turns) with Groq `openai/gpt-o
 .venv/bin/python -m pytest -q
 .venv/bin/python -m auditor estimate data/benchmark/conversations.jsonl --model gpt-5-mini
 .venv/bin/python -m auditor audit abcd --limit 5 --mode agentic --provider groq --model openai/gpt-oss-120b
+AUDITOR_DEV_ENV_KEYS=1 .venv/bin/uvicorn auditor.api:app --port 8000   # local API; dev flag lets it use .env keys
 .venv/bin/python -m auditor download abcd
 .venv/bin/python -m auditor download callcenter --domain medical_equipment_outbound
 .venv/bin/python -m auditor stats abcd --split test
