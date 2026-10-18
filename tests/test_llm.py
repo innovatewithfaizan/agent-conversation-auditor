@@ -50,3 +50,27 @@ def test_output_cap_is_sent_with_each_request():
         "create": staticmethod(lambda **kw: sent.update(kw))})})})
     backend.chat([{"role": "user", "content": "hi"}], [], "auto")
     assert sent["max_completion_tokens"] == 600
+
+
+def test_invalid_tool_json_from_groq_is_retried():
+    import openai
+    from types import SimpleNamespace
+
+    def bad_request():
+        resp = SimpleNamespace(request=None, status_code=400, headers={})
+        return openai.BadRequestError("Error code: 400 - {'code': 'tool_use_failed'}", response=resp, body=None)
+
+    attempts = []
+
+    def create(**kw):
+        attempts.append(1)
+        if len(attempts) < 3:
+            raise bad_request()
+        return "ok"
+
+    backend = llm.Backend("groq", "openai/gpt-oss-20b", api_key="k")
+    backend._client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
+    assert backend.chat([], [], "auto") == "ok" and len(attempts) == 3
+    attempts.clear()
+    with pytest.raises(openai.BadRequestError):
+        backend.chat([], [], "auto", attempts=2)
