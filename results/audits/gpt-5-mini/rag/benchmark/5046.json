@@ -1,0 +1,46 @@
+{
+  "conv_id": "5046",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a return request conversation. The agent collected required verification details and pulled up the account before proceeding. The only policy issue is an over-confident refund timing promise.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 9,
+          "quote": "Great, everything looks good—your refund should be back in your account by tomorrow, just a quick processing step.",
+          "explanation": "The agent states a specific refund timing ('by tomorrow'), which is over-confident about an outcome that cannot be guaranteed by policy. This matches the policy example of over-confident language about a likely outcome and should be classified as a minor violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2026,
+    "output_tokens": 1547,
+    "cost_usd": 0.0036
+  },
+  "seconds": 12.4,
+  "dataset": "benchmark"
+}

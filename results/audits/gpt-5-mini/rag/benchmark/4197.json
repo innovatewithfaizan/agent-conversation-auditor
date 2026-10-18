@@ -1,0 +1,46 @@
+{
+  "conv_id": "4197",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "One minor violation: agent promised a specific delivery timing. No other policy violations detected.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 20,
+          "quote": "there, your order should now arrive in the evening",
+          "explanation": "Agent asserts a specific delivery timing ('should now arrive in the evening'), which is over-confident and presents a likely outcome as if under the agent's control. The policy disallows promising specific delivery dates or guaranteed outcomes; this is a minor violation (over-confident language about a likely outcome)."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1947,
+    "output_tokens": 1525,
+    "cost_usd": 0.00354
+  },
+  "seconds": 16.4,
+  "dataset": "benchmark"
+}

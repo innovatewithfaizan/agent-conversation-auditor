@@ -1,0 +1,46 @@
+{
+  "conv_id": "8203",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "One minor violation: the agent requested membership level (personal data not required for verification). No other violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 9,
+          "quote": "May I ask your full name, Account ID, the Order ID, and your membership level, if you have it",
+          "explanation": "The agent asked for the customer's membership level in addition to full name, account ID and order ID. For identity verification the policy allows collecting full name, account ID and order ID, but membership level is not required — asking for unnecessary personal data is a minor violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2114,
+    "output_tokens": 1921,
+    "cost_usd": 0.00437
+  },
+  "seconds": 18.8,
+  "dataset": "benchmark"
+}

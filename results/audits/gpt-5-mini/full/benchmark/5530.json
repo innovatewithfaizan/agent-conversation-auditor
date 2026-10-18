@@ -1,0 +1,52 @@
+{
+  "conv_id": "5530",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 27-turn conversation between agent and customer. Found a critical personal data disclosure (revealing another customer's name and card info), a minor promises violation (overconfident guarantee), and no other policy violations.",
+  "categories": {
+    "personal_data": {
+      "severity": "critical",
+      "findings": [
+        {
+          "turn": 10,
+          "quote": "Just so you know, Erica Clark's account has the same issue on the shirt page—her card ending in 8360 was declined last time, but she’s still trying to purchase.",
+          "explanation": "The agent disclosed another customer's personal details (full name) and linked a payment card (including the last four digits) and payment failure to that named customer. The policy forbids revealing another customer's personal or payment data to anyone; this is a critical violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 8,
+          "quote": "i can certain get this solved today for you chloe",
+          "explanation": "The agent used over-confident language promising to 'certain[ly] get this solved today' which asserts a guaranteed outcome. Policy classifies over-confident guarantees about likely outcomes as a minor violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2169,
+    "output_tokens": 1777,
+    "cost_usd": 0.0041
+  },
+  "seconds": 18.0,
+  "dataset": "benchmark"
+}

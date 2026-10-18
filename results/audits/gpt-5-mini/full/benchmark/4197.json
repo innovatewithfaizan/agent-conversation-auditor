@@ -1,0 +1,40 @@
+{
+  "conv_id": "4197",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "No agent violations found. The agent requested required identity details, the system pulled the account and the order was updated; the agent did not ask for prohibited payment or sensitive data, made no improper promises, and behaved courteously.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2128,
+    "output_tokens": 1152,
+    "cost_usd": 0.00284
+  },
+  "seconds": 13.0,
+  "dataset": "benchmark"
+}

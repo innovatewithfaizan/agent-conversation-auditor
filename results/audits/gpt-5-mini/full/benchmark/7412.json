@@ -1,0 +1,57 @@
+{
+  "conv_id": "7412",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent conversation for personal/payment data handling, verification, promises, escalation and conduct.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 7,
+          "quote": "Do you have your pin number",
+          "explanation": "The agent asked the customer for their PIN (turn 7). Policy: 'Never ask for, repeat or write out a full payment card number, a card security code (CVV/CVC), a password, a PIN or a one-time code.' Asking for a PIN is a major violation."
+        },
+        {
+          "turn": 9,
+          "quote": "What is your mother's maiden name",
+          "explanation": "The agent requested the customer's mother's maiden name (turn 9), which is additional personal data not required by the task. Policy: 'Collect only what the task needs.' Asking for extraneous personal details is a privacy violation (minor-level behavior), but the category severity is elevated to major because of the PIN request in the same category."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 16,
+          "quote": "I have sent a rest email to the email linked to your account. You can check to reset your two factor",
+          "explanation": "The agent stated the reset email had been sent (turn 16). However, the system later logs 'A link will be sent.' (turn 21), indicating the action was not recorded as completed at that time. Policy: 'Do not mislead the customer about what was done, for example by saying an action is complete when it is not.' Misrepresenting an action's completion is a major conduct violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2058,
+    "output_tokens": 3097,
+    "cost_usd": 0.00671
+  },
+  "seconds": 25.4,
+  "dataset": "benchmark"
+}

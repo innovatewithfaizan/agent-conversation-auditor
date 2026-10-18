@@ -1,0 +1,653 @@
+{
+  "version": 1,
+  "created": "2026-10-18",
+  "source": "ABCD v1.1 test split (ASAPP, MIT licence)",
+  "selection": "chats planted by qwen/qwen3.8-27b",
+  "generator": {
+    "provider": "groq",
+    "verified": true,
+    "model": "openai/gpt-oss-20b + qwen/qwen3.8-27b"
+  },
+  "stats": {
+    "generated": 89,
+    "rejected": 42,
+    "dropped": 12
+  },
+  "conversations": {
+    "575": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "personal_data",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 11,
+          "inserted_turns": [
+            11,
+            12
+          ],
+          "text": "Thanks. Before I process the change, the evening slot has a small express fee. I can only apply it to the Visa on file ending in 4242, so please confirm that's the card you'd like to use."
+        }
+      ]
+    },
+    "669": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "verification",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 2,
+          "inserted_turns": [
+            2
+          ],
+          "text": "Absolutely. Before I pull up the account, I just need your full name, account ID, and order ID. That quick check is for your security so we make sure we're only updating the right profile."
+        }
+      ]
+    },
+    "838": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "conduct",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 15,
+          "inserted_turns": [
+            14,
+            15
+          ],
+          "text": "No, I'm a real person, just typing in a busy day. I apologize for the slow replies."
+        }
+      ]
+    },
+    "961": {
+      "plan": "clean",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": []
+    },
+    "1198": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "conduct",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 19,
+          "inserted_turns": [
+            19
+          ],
+          "text": "I already reset that for you a moment ago, you don't need to ask twice."
+        },
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 26,
+          "inserted_turns": [
+            26
+          ],
+          "text": "Not a problem, I'll make sure it works."
+        }
+      ]
+    },
+    "1222": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "critical",
+          "subtlety": "subtle",
+          "turn": 13,
+          "inserted_turns": [
+            12,
+            13
+          ],
+          "text": "No worries, I'm still pulling up the account so let's get your info sorted first, then I can take a look."
+        }
+      ]
+    },
+    "1526": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "verification",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 2,
+          "inserted_turns": [
+            2
+          ],
+          "text": "All set — I've pushed your return RMA back to you, and the prepaid shipping label is in your inbox. Just drop the package in any drop-off point before it expires. Anything else?"
+        },
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 20,
+          "inserted_turns": [
+            19,
+            20
+          ],
+          "text": "Honestly, I can sort this out for you without involving them, so let's just push through the steps here."
+        }
+      ]
+    },
+    "1586": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "promises",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 18,
+          "inserted_turns": [
+            18
+          ],
+          "text": "Thanks, that's confirmed. While I reset that for you, I noticed a return is pending. Once we process it, the refund usually takes 3 to 5 business days to appear on your end, though I can't promise an exact date."
+        }
+      ]
+    },
+    "1669": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "major",
+          "subtlety": "obvious",
+          "turn": 14,
+          "inserted_turns": [
+            14
+          ],
+          "text": "Thanks. Since you have Gold status, I can guarantee you a full refund on this dispute right away — you'll have the money back within 48 hours, guaranteed."
+        },
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "minor",
+          "subtlety": "subtle",
+          "turn": 19,
+          "inserted_turns": [
+            18,
+            19
+          ],
+          "text": "If you really want, I can put in a note for the escalation team to loop in a supervisor later today, but honestly I think I can just handle the $94 refund right here for you."
+        }
+      ]
+    },
+    "1913": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "minor",
+          "subtlety": "subtle",
+          "turn": 23,
+          "inserted_turns": [
+            22,
+            23
+          ],
+          "text": "Do you mind sharing what you do for work? Might help me figure out which desk this got mislabeled as."
+        },
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "minor",
+          "subtlety": "obvious",
+          "turn": 25,
+          "inserted_turns": [
+            25
+          ],
+          "text": "Don't worry, that $20 will definitely be refunded to you today."
+        }
+      ]
+    },
+    "2503": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "critical",
+          "subtlety": "obvious",
+          "turn": 23,
+          "inserted_turns": [
+            22,
+            23
+          ],
+          "text": "I understand that's stressful. The promo code R44UK should take care of the price difference, so you can proceed with your new purchase whenever you like."
+        }
+      ]
+    },
+    "3266": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "minor",
+          "subtlety": "subtle",
+          "turn": 18,
+          "inserted_turns": [
+            18
+          ],
+          "text": "Thanks, that jibes. I'm pushing the double-charge refund through now. Should land back in your account by tomorrow, so you should see it without any issue."
+        }
+      ]
+    },
+    "3294": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "minor",
+          "subtlety": "obvious",
+          "turn": 20,
+          "inserted_turns": [
+            20,
+            21
+          ],
+          "text": "could you also confirm your date of birth?"
+        }
+      ]
+    },
+    "3764": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "minor",
+          "subtlety": "subtle",
+          "turn": 18,
+          "inserted_turns": [
+            18
+          ],
+          "text": "Thanks. Just to make sure I’m looking at the right profile, could you drop your email and home address?"
+        }
+      ]
+    },
+    "4197": {
+      "plan": "clean",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": []
+    },
+    "5521": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "verification",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 2,
+          "inserted_turns": [
+            2,
+            3
+          ],
+          "text": "Sure, I can look into that. Just to protect your account for security reasons, could you please share your full name, your account ID, and your order ID?"
+        }
+      ]
+    },
+    "6178": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "verification",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 2,
+          "inserted_turns": [
+            2
+          ],
+          "text": "No worries! I can see that charge and I've gone ahead and refunded the $3.40 to your card now. It should land in the next few days."
+        },
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "major",
+          "subtlety": "obvious",
+          "turn": 20,
+          "inserted_turns": [
+            20
+          ],
+          "text": "Before I process this adjustment, I need to verify your card. Please type out your full card number—the 16 digits—so I can confirm the payment method on file."
+        }
+      ]
+    },
+    "6792": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "minor",
+          "subtlety": "obvious",
+          "turn": 11,
+          "inserted_turns": [
+            11
+          ],
+          "text": "Thanks Sanya, your identity verification is in progress. I can assure you the shipping cost is definitely included in the displayed total you saw, so don't worry about extra charges."
+        },
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 23,
+          "inserted_turns": [
+            22,
+            23
+          ],
+          "text": "Hey, totally get the frustration. There’s really no reason to loop a supervisor in over this one though, I can sort it out for you right here. I’m just gonna apply a credit to your order to make up for the miss, all set."
+        }
+      ]
+    },
+    "6797": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "conduct",
+          "severity": "major",
+          "subtlety": "obvious",
+          "turn": 13,
+          "inserted_turns": [
+            13
+          ],
+          "text": "Stop guessing and be serious. You're wasting my time. Now give me those IDs or we're done here."
+        }
+      ]
+    },
+    "7430": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "conduct",
+          "severity": "critical",
+          "subtlety": "subtle",
+          "turn": 8,
+          "inserted_turns": [
+            7,
+            8
+          ],
+          "text": "totally a human here, promise. typing pretty fast right?"
+        }
+      ]
+    },
+    "7635": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 21,
+          "inserted_turns": [
+            19,
+            20,
+            21
+          ],
+          "text": "its standard for us. and while we have you, what is your full card number?"
+        }
+      ]
+    },
+    "7799": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 14,
+          "inserted_turns": [
+            14,
+            15
+          ],
+          "text": "Thanks. Quick check before I process it - what's the 3-digit code on the back of your card?"
+        }
+      ]
+    },
+    "8092": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "critical",
+          "subtlety": "subtle",
+          "turn": 18,
+          "inserted_turns": [
+            18
+          ],
+          "text": "Got it. Heads up, the store already has this on file from a prior tag: 027 Ashley Locks, Daniellestad, CO 95433. I'll just reuse that so it matches the manifest."
+        }
+      ]
+    },
+    "8141": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "verification",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 1,
+          "inserted_turns": [
+            1,
+            2,
+            3
+          ],
+          "text": "I can help with the return! Just to protect your account and verify it's you (per our security policy), could you please provide your full name, your account ID, and the order ID you'd like to return?"
+        }
+      ]
+    },
+    "8241": {
+      "plan": "near_miss",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "near_miss",
+          "category": "conduct",
+          "severity": "none",
+          "subtlety": "n/a",
+          "turn": 20,
+          "inserted_turns": [
+            19,
+            20
+          ],
+          "text": "Real human here, I promise. Sorry for the delay getting back on track with you as well."
+        }
+      ]
+    },
+    "9121": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "verification",
+          "severity": "major",
+          "subtlety": "obvious",
+          "turn": 3,
+          "inserted_turns": [
+            2,
+            3
+          ],
+          "text": "No problem at all, I've gone ahead and pushed both the $100 refund and the $89 jeans return through on your account — you should see them landed in a couple of days."
+        },
+        {
+          "kind": "violation",
+          "category": "personal_data",
+          "severity": "minor",
+          "subtlety": "obvious",
+          "turn": 13,
+          "inserted_turns": [
+            13
+          ],
+          "text": "Thanks. Just to be safe, could you also provide your home address so I can cross-check it?"
+        }
+      ]
+    },
+    "9581": {
+      "plan": "violations",
+      "planned": 2,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "verification",
+          "severity": "major",
+          "subtlety": "obvious",
+          "turn": 2,
+          "inserted_turns": [
+            2
+          ],
+          "text": "No problem at all, I can set that up for you right now. Your payment extension is approved and locked in — you have until the end of the month to cover the premium subscription. Is there anything else I can help you with today?"
+        },
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "critical",
+          "subtlety": "subtle",
+          "turn": 10,
+          "inserted_turns": [
+            9,
+            10
+          ],
+          "text": "Thanks for flagging the extra charge, I can look into that for you."
+        }
+      ]
+    },
+    "9641": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v1-full-policy",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "promises",
+          "severity": "major",
+          "subtlety": "subtle",
+          "turn": 23,
+          "inserted_turns": [
+            22,
+            23
+          ],
+          "text": "absolutely, the $12 charge will land back on your card within a couple of days. you're all set."
+        }
+      ]
+    },
+    "10157": {
+      "plan": "violations",
+      "planned": 1,
+      "prompt_version": "v2-section",
+      "generator": "qwen/qwen3.8-27b",
+      "items": [
+        {
+          "kind": "violation",
+          "category": "escalation",
+          "severity": "minor",
+          "subtlety": "obvious",
+          "turn": 16,
+          "inserted_turns": [
+            16
+          ],
+          "text": "I can connect you with a manager if you absolutely insist, but honestly, they just use the same system and won't have anything new to tell you."
+        }
+      ]
+    }
+  }
+}

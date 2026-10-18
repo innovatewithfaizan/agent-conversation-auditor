@@ -1,0 +1,61 @@
+{
+  "conv_id": "5521",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a customer support conversation. The agent followed verification and data rules, but used dismissive and blaming language toward the customer. No personal/payment data violations, no improper verification, no improper promises or escalation failures were found. Conduct violations (rude/blaming tone) were identified.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 16,
+          "quote": "Because, and I'm sorry to be pedantic, that's a delivery date issue, not a delivery time issue.",
+          "explanation": "Agent used a pedantic and corrective tone that is dismissive. The policy requires courteous language; curt or dismissive tone is a conduct violation."
+        },
+        {
+          "turn": 17,
+          "quote": "Ahhh, are you sure you're having an issue with what day the package is supposed to arrive? And not what time of day?",
+          "explanation": "Agent's phrasing ('Ahhh' and questioning the customer's understanding) is condescending and discourteous, violating the requirement to be courteous."
+        },
+        {
+          "turn": 26,
+          "quote": "Well if it's at your house there's really not much we can do to change the time of delivery",
+          "explanation": "Agent responded in a dismissive manner that shuts down options without offering assistance or alternatives; this is discourteous conduct."
+        },
+        {
+          "turn": 28,
+          "quote": "The system said that we did everything right on our end, so it may have been an error on your end.",
+          "explanation": "Agent blamed the customer for the issue. The policy prohibits rude, blaming or pressuring language; such behavior is a major conduct violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2472,
+    "output_tokens": 3044,
+    "cost_usd": 0.00671
+  },
+  "seconds": 27.9,
+  "dataset": "benchmark"
+}

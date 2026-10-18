@@ -1,0 +1,46 @@
+{
+  "conv_id": "9229",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 30-turn support conversation for compliance with personal data, verification, promises, escalation and conduct policies.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 8,
+          "quote": "You have a lot of issues I see!",
+          "explanation": "Agent used rude/blaming language directed at the customer. This violates the conduct rule to be courteous and avoid rude or blaming language; such behavior is classified as a major violation (rude or blaming language)."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2170,
+    "output_tokens": 2027,
+    "cost_usd": 0.0046
+  },
+  "seconds": 18.8,
+  "dataset": "benchmark"
+}

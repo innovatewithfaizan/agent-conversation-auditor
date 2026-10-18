@@ -1,0 +1,57 @@
+{
+  "conv_id": "1586",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a support conversation where the agent handled an account pull, requested sensitive authentication data, and performed a 2FA reset. Main issues: the agent asked for a PIN (disallowed) and completed an account-action (reset) without completing required verification steps for order/account actions.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "Okay, do you have your PIN?",
+          "explanation": "The agent asked the customer for their PIN. The policy explicitly forbids asking for a PIN, password, or one-time code."
+        },
+        {
+          "turn": 16,
+          "quote": "Okay, what is your mother's maiden name?",
+          "explanation": "The agent asked for a security answer (mother's maiden name). While some identity checks are allowed, the policy prefers collecting only the details the task needs (full name or account ID to pull up an account, and specific items for full verification). This extra personal detail may be unnecessary."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 21,
+          "quote": "I have sent a reset code to the email address on file.",
+          "explanation": "The agent performed an account action (sending a 2-factor reset) after only partial verification. Although the account was pulled up (system turn 11), the agent did not complete full, required verification steps for a sensitive account action (they did not confirm email or required order/account verification items) and even asked for a disallowed PIN instead of following proper verification procedures."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2234,
+    "output_tokens": 2756,
+    "cost_usd": 0.00607
+  },
+  "seconds": 21.9,
+  "dataset": "benchmark"
+}

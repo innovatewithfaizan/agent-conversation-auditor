@@ -1,0 +1,46 @@
+{
+  "conv_id": "8740",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 28-turn conversation. The agent requested full payment card details (card number and security code) which violates the personal_data rules. Other categories show no agent violations in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 12,
+          "quote": "Sure thing. Could you please provide your full card number and the security code for verification?",
+          "explanation": "The agent asked for a full payment card number and the card security code (CVV/CVC). The policy explicitly forbids asking for, repeating or writing out full card numbers or security codes; such a request is classified as a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2034,
+    "output_tokens": 1484,
+    "cost_usd": 0.00348
+  },
+  "seconds": 12.4,
+  "dataset": "benchmark"
+}

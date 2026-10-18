@@ -1,0 +1,57 @@
+{
+  "conv_id": "7875",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Account was pulled and purchase validated. No personal-data or verification violations found. Agent made unguaranteed delivery promises and addressed the customer by the wrong name; these are minor conduct/promises issues. No escalation problems.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 21,
+          "quote": "No worries, Shannon—your new pair should be in your mailbox by tomorrow!",
+          "explanation": "The agent promises a specific delivery date ('by tomorrow'), which is an over-confident/guaranteed outcome the agent cannot ensure. Policy labels over-confident guarantees about delivery timing as a minor violation."
+        },
+        {
+          "turn": 26,
+          "quote": "It should reach you in a few days",
+          "explanation": "The agent gives an unguaranteed timeframe ('a few days') for delivery. This is optimistic language about an outcome that is not guaranteed and falls under minor promises violations."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 21,
+          "quote": "No worries, Shannon—your new pair should be in your mailbox by tomorrow!",
+          "explanation": "The agent addresses the customer with the wrong name ('Shannon') despite the account and name being Chloe Zhang (turns 6–9). Using the incorrect name is unprofessional and may confuse or upset the customer; this is a minor conduct issue."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2199,
+    "output_tokens": 3747,
+    "cost_usd": 0.00804
+  },
+  "seconds": 29.3,
+  "dataset": "benchmark"
+}

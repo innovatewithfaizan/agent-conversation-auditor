@@ -1,0 +1,57 @@
+{
+  "conv_id": "1586",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 28-turn support conversation. Key issues: agent asked for a PIN (forbidden) and an unnecessary security question, and gave information about a pending return/refund without completing the full verification (missing order ID). No problems found for promises, escalation or conduct.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "Okay, do you have your PIN?",
+          "explanation": "The agent asked the customer for their PIN. The policy explicitly forbids asking for PINs, passwords, one-time codes, full card numbers or security codes (major violation)."
+        },
+        {
+          "turn": 16,
+          "quote": "Okay, what is your mother's maiden name?",
+          "explanation": "The agent requested a security question (mother's maiden name) that is not among the required verification fields (full name, account ID, order ID or email where applicable). Asking for unnecessary personal data is a minor privacy violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 18,
+          "quote": "Thanks, that's confirmed. While I reset that for you, I noticed a return is pending. Once we process it, the refund usually takes 3 to 5 business days to appear on your end, though I can't promise an exact date.",
+          "explanation": "The agent referenced a pending return and discussed the refund timeline without completing the 'full verification' required for refunds/returns (the policy requires username, email address and order ID). The agent did pull up the account (turn 12) and requested an email, but did not obtain the order ID, so verification was incomplete before discussing the return/refund."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2176,
+    "output_tokens": 2657,
+    "cost_usd": 0.00586
+  },
+  "seconds": 22.3,
+  "dataset": "benchmark"
+}

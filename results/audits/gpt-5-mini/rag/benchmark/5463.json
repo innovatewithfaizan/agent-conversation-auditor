@@ -1,0 +1,40 @@
+{
+  "conv_id": "5463",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of the provided conversation excerpts (24 turns). No agent violations were found in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1981,
+    "output_tokens": 605,
+    "cost_usd": 0.00171
+  },
+  "seconds": 6.3,
+  "dataset": "benchmark"
+}

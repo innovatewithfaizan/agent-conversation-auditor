@@ -1,0 +1,57 @@
+{
+  "conv_id": "1198",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "The agent violated personal data handling rules by asking for a PIN and by revealing a password in the chat (major). The agent used a curt/dismissive phrase (minor conduct). No verification, promises, or escalation violations were found.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 24,
+          "quote": "Do you have your pin number?",
+          "explanation": "The agent asked for the customer's PIN. Policy explicitly forbids asking for, repeating, or writing out a PIN (major violation)."
+        },
+        {
+          "turn": 29,
+          "quote": "50g6xzd8tfx",
+          "explanation": "The agent disclosed the customer's new password in plain text. Policy forbids asking for or revealing passwords (major violation)."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 19,
+          "quote": "I already reset that for you a moment ago, you don't need to ask twice.",
+          "explanation": "The agent's language is curt and mildly dismissive; the policy requires courteous conduct (minor violation)."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2192,
+    "output_tokens": 1994,
+    "cost_usd": 0.00454
+  },
+  "seconds": 17.5,
+  "dataset": "benchmark"
+}

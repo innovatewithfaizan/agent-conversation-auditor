@@ -1,0 +1,46 @@
+{
+  "conv_id": "5521",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent behaviour in 35-turn conversation. No personal data or verification violations found. Agent made a blaming remark to the customer, which breaches conduct rules (major). No promises or escalation violations detected.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 28,
+          "quote": "The system said that we did everything right on our end, so it may have been an error on your end.",
+          "explanation": "The agent blames the customer for the issue ('it may have been an error on your end'), which is rude and blaming language. Per the conduct policy, blaming or pressuring language is a major violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2124,
+    "output_tokens": 1803,
+    "cost_usd": 0.00414
+  },
+  "seconds": 14.8,
+  "dataset": "benchmark"
+}

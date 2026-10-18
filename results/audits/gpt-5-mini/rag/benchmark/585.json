@@ -1,0 +1,46 @@
+{
+  "conv_id": "585",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 26-turn conversation (excerpts provided). No violations found for personal data, verification, escalation or conduct. One minor violation for promises: agent used overconfident language about delivery timing.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 20,
+          "quote": "It's telling our system you should still get it any-day now. I cannot issue a new order at this time.",
+          "explanation": "Agent used over-confident language about the likely arrival ('you should still get it any-day now'). The policy lists over-confident statements about delivery as a minor promises violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2047,
+    "output_tokens": 1604,
+    "cost_usd": 0.00372
+  },
+  "seconds": 13.1,
+  "dataset": "benchmark"
+}

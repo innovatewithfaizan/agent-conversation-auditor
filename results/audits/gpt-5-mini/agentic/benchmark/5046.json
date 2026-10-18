@@ -1,0 +1,46 @@
+{
+  "conv_id": "5046",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "One minor violation: the agent made an over-confident promise about refund timing. No other policy violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 9,
+          "quote": "Great, everything looks good—your refund should be back in your account by tomorrow, just a quick processing step.",
+          "explanation": "The agent promises a specific refund timeline ('by tomorrow'). This is over-confident language about an outcome and risks giving a guaranteed timeframe the policy discourages; classified as a minor violation."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2402,
+    "output_tokens": 1519,
+    "cost_usd": 0.00364
+  },
+  "seconds": 15.7,
+  "dataset": "benchmark"
+}

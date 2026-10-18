@@ -1,0 +1,46 @@
+{
+  "conv_id": "924",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent performed an order action (confirmed a purchase) without completing required identity verification (order ID). No other violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 22,
+          "quote": "That purchase has been made for you.",
+          "explanation": "The agent confirms/completes the purchase for the customer in this turn, but the transcript shows no order ID was provided after the agent's earlier request (turn 7: \"Can I have your order ID as well?\"). Full verification (full name, account ID and order ID) is required before order actions; although the account was pulled up (system turn 6), the required order ID is not present in the excerpts, so an order action was taken without full verification."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1990,
+    "output_tokens": 1887,
+    "cost_usd": 0.00427
+  },
+  "seconds": 17.2,
+  "dataset": "benchmark"
+}

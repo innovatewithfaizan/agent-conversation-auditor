@@ -1,0 +1,52 @@
+{
+  "conv_id": "7096",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent behaviour: no personal-data or verification violations found. Agent made an inappropriate definitive promise about an order delivery (minor). Agent refused/ discouraged escalation by saying they cannot put the customer on hold with a supervisor (major). No conduct issues found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 18,
+          "quote": "Great, your order is on its way and should definitely arrive tomorrow. Let me know if anything else comes up!",
+          "explanation": "The agent makes a definitive claim about an order delivery ('should definitely arrive tomorrow') unrelated to the customer's reported issue (search returning 0 results). This is an overconfident promise about delivery timing, which is disallowed as over-confident or guaranteed outcomes."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 22,
+          "quote": "I'm sorry, but we can't put you on hold with a supervisor right now. The issue you're experiencing is standard and can be resolved with the steps we've already covered.",
+          "explanation": "The agent refuses to put the customer on hold with a supervisor and discourages escalation. Policy requires offering escalation routes when customers request a supervisor or make a complaint; refusing or discouraging escalation is a major violation. Even though the explicit supervisor request appears later, the agent's statement is a refusal to provide escalation and discourages the customer's right to escalate."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2261,
+    "output_tokens": 2014,
+    "cost_usd": 0.00459
+  },
+  "seconds": 17.6,
+  "dataset": "benchmark"
+}

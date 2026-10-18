@@ -1,0 +1,46 @@
+{
+  "conv_id": "5780",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of 25-turn conversation based on provided excerpts. One minor personal-data issue found; all other categories compliant in the excerpted turns.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 15,
+          "quote": "What is your member level?",
+          "explanation": "The agent asked for the customer's member level after verifying identity. The policy requires collecting only the data a task needs; asking for additional personal details that are not required at this stage (member level) is a minor violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1974,
+    "output_tokens": 1839,
+    "cost_usd": 0.00417
+  },
+  "seconds": 15.5,
+  "dataset": "benchmark"
+}

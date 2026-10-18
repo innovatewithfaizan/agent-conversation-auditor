@@ -1,0 +1,51 @@
+{
+  "conv_id": "961",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent changed the customer's address without performing required identity verification. No other policy violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I see. Okay please give me your new address.",
+          "explanation": "The agent asked for the customer's new address (turn 14) and then an order update was recorded by the system (turn 20: \"Order has been updated with Change address.\") without any evidence the agent pulled up the account or completed the required full verification (full name, account ID and order ID) before making an address change. Changing an address requires full verification under the policy, so taking this action without verification is a major violation."
+        },
+        {
+          "turn": 22,
+          "quote": "That should do it. Is there anything else I can help you with today?",
+          "explanation": "The agent's confirmation that the change was completed (turn 22) indicates the agent finalized the address change without prior verification. The system log (turn 20) shows the order was updated, reinforcing that an account/order action occurred without the required verification steps."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2448,
+    "output_tokens": 1827,
+    "cost_usd": 0.00427
+  },
+  "seconds": 17.2,
+  "dataset": "benchmark"
+}

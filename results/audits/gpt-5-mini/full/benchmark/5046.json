@@ -1,0 +1,52 @@
+{
+  "conv_id": "5046",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a customer support conversation for compliance with personal data, verification, promises, escalation, and conduct policies.",
+  "categories": {
+    "personal_data": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 19,
+          "quote": "Can you please give me your full address? I am going to email the shipping label to you.",
+          "explanation": "The agent requested the customer's full address to email a shipping label. The customer later chose an in-store return (turns 22-24), so collecting the full address was unnecessary for the chosen return method and violates the rule to collect only the data the task needs."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 9,
+          "quote": "Great, everything looks good—your refund should be back in your account by tomorrow, just a quick processing step.",
+          "explanation": "The agent guaranteed a specific refund timeframe ('by tomorrow'). The policy disallows over-confident language promising specific delivery or refund dates; this is an over-confident/guaranteed outcome and should be avoided."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2194,
+    "output_tokens": 1626,
+    "cost_usd": 0.0038
+  },
+  "seconds": 14.6,
+  "dataset": "benchmark"
+}

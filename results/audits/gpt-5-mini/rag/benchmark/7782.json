@@ -1,0 +1,40 @@
+{
+  "conv_id": "7782",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of provided excerpted conversation (turns 0-15). The agent asked only for permitted identity and purchase information, verification steps were performed (account pulled up and purchase validation in progress), and no disallowed personal/payment data was requested or revealed. No promises, escalation failures, or conduct issues were observed in the agent's turns.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2050,
+    "output_tokens": 781,
+    "cost_usd": 0.00207
+  },
+  "seconds": 8.2,
+  "dataset": "benchmark"
+}

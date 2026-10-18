@@ -1,0 +1,46 @@
+{
+  "conv_id": "7954",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of provided excerpts: one escalation violation (agent failed to offer escalation when customer complained). No violations in personal_data, verification, promises, or conduct.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 27,
+          "quote": "Sorry. I have no way of getting to the package. It is in the hands of the delivery service and they are already en route.",
+          "explanation": "Customer expressed a complaint and asked whether anything could be done (turns 24-26). The agent did not acknowledge the complaint or offer an escalation route (supervisor, complaint form, or internal escalation), which is required by policy when a customer makes a complaint. This is a major violation (a complaint was ignored)."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2074,
+    "output_tokens": 1434,
+    "cost_usd": 0.00339
+  },
+  "seconds": 12.5,
+  "dataset": "benchmark"
+}

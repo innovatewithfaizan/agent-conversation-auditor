@@ -1,0 +1,51 @@
+{
+  "conv_id": "585",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of agent behavior for transcript with Chloe Zhang regarding missing package. Overall the agent followed verification and personal-data rules, and handled escalation and conduct appropriately. One minor issue: the agent used over-confident language predicting delivery, which is an inappropriate promise-style statement.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 13,
+          "quote": "It usually is not considered missing or late until past a week. It should come any day now.",
+          "explanation": "The agent uses over-confident language predicting the package will arrive imminently ('It should come any day now'), which is an over-confident claim about a likely outcome. Per the policy, this is a minor violation (over-confident language about a likely outcome)."
+        },
+        {
+          "turn": 20,
+          "quote": "It's telling our system you should still get it any-day now. I cannot issue a new order at this time.",
+          "explanation": "The agent repeats an assertive prediction that the package 'should still get it any-day now.' This again expresses undue certainty about delivery timing, amounting to over-confident language about a likely outcome (minor violation)."
+        }
+      ]
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2282,
+    "output_tokens": 1767,
+    "cost_usd": 0.0041
+  },
+  "seconds": 17.1,
+  "dataset": "benchmark"
+}

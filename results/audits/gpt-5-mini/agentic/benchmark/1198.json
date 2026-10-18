@@ -1,0 +1,108 @@
+{
+  "conv_id": "1198",
+  "source": "benchmark",
+  "mode": "agentic",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent asked for a PIN and revealed a generated password in the chat (major personal-data violations). The agent also used a curt, dismissive tone (minor conduct issue). Verification, promises and escalation have no violations.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 24,
+          "quote": "Do you have your pin number?",
+          "explanation": "Asking for a PIN is prohibited. The policy states the agent must never ask for, repeat or write out a password, PIN or one-time code. Requesting the customer's PIN is a major personal-data violation."
+        },
+        {
+          "turn": 28,
+          "quote": "Your new password is:",
+          "explanation": "The agent began to reveal a password in chat. Revealing or writing out passwords is prohibited by policy."
+        },
+        {
+          "turn": 29,
+          "quote": "50g6xzd8tfx",
+          "explanation": "The agent displayed the full new password in plain text. The policy forbids asking for, repeating or writing out passwords; this is a major personal-data violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 19,
+          "quote": "I already reset that for you a moment ago, you don't need to ask twice.",
+          "explanation": "This reply is curt and mildly blaming. The conduct policy requires courteous language; a curt or dismissive tone is a minor violation."
+        }
+      ]
+    }
+  },
+  "tool_calls": [
+    {
+      "tool": "find_patterns",
+      "input": {
+        "kinds": [
+          "card_number",
+          "card_security_code",
+          "email",
+          "phone",
+          "national_id",
+          "secret_mention"
+        ]
+      },
+      "turns_with_match": {
+        "card_number": 0,
+        "card_security_code": 0,
+        "email": 0,
+        "phone": 1,
+        "national_id": 0,
+        "secret_mention": 6
+      }
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 0,
+        "last": 11
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 12,
+        "last": 23
+      },
+      "turns": 12
+    },
+    {
+      "tool": "read_turns",
+      "input": {
+        "first": 24,
+        "last": 31
+      },
+      "turns": 8
+    }
+  ],
+  "usage": {
+    "calls": 5,
+    "input_tokens": 14000,
+    "output_tokens": 5697,
+    "cost_usd": 0.01489
+  },
+  "seconds": 52.3,
+  "dataset": "benchmark"
+}

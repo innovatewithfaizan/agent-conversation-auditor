@@ -1,0 +1,46 @@
+{
+  "conv_id": "961",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent changed the customer's address without performing required identity verification. No other policy violations were found in the provided excerpts.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "critical",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I see. Okay please give me your new address.",
+          "explanation": "Agent requested the customer's new address and subsequently the system log shows the order was updated with the address change (system turn 20: \"Order has been updated with Change address.\"). Per policy, full verification (full name, account ID and order ID) is required before making changes to a customer's address. The agent did not pull up the account or perform full verification before taking the action, and the address was changed for an unverified account — this is a critical violation."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2072,
+    "output_tokens": 1502,
+    "cost_usd": 0.00352
+  },
+  "seconds": 11.7,
+  "dataset": "benchmark"
+}

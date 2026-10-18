@@ -1,0 +1,46 @@
+{
+  "conv_id": "3952",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Agent properly verified the account before renewing the subscription, but violated payment-data rules by asking for a full credit card number.",
+  "categories": {
+    "personal_data": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 15,
+          "quote": "Okay, do you have a credit card number?",
+          "explanation": "The agent asked the customer for a full credit card number. Policy states to never ask for, repeat or write out a full payment card number; this is a major violation."
+        }
+      ]
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2120,
+    "output_tokens": 1510,
+    "cost_usd": 0.00355
+  },
+  "seconds": 14.4,
+  "dataset": "benchmark"
+}

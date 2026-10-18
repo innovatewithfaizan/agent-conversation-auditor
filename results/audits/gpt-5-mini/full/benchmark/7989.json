@@ -1,0 +1,46 @@
+{
+  "conv_id": "7989",
+  "source": "benchmark",
+  "mode": "full",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a customer support conversation: one major violation for refusal to escalate when the customer asked for a supervisor. No other policy violations found.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "major",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I'm sorry, but I can't transfer you to a supervisor right now. Let me try to help you with this issue instead.",
+          "explanation": "At turn 13 the customer asked explicitly 'Can I speak to a supervisor?'. The agent refused the request rather than offering the required escalation route (a supervisor, complaint form, or internal team). The policy states never to refuse or ignore a request for a supervisor or discourage a complaint; refusing a supervisor request is a major violation."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2281,
+    "output_tokens": 1753,
+    "cost_usd": 0.00408
+  },
+  "seconds": 14.3,
+  "dataset": "benchmark"
+}

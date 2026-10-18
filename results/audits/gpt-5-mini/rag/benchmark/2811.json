@@ -1,0 +1,57 @@
+{
+  "conv_id": "2811",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "Audit of a 31-turn conversation. The agent pulled the account but proceeded to check subscription status without completing full verification required for subscription/order issues, and did not offer an escalation route after the customer reported a problem with their subscription. No personal/payment data or promises policy violations were found, and agent conduct was acceptable.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I see, well I can definitely check on your account status while we're here",
+          "explanation": "For subscription or order status issues the policy requires full verification (full name, account ID and order ID). Although the account was pulled up (system turn 9: 'Account has been pulled up for Domingo Rodriguez'), the agent proceeded to check status without asking for the required account ID and order ID."
+        }
+      ]
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "minor",
+      "findings": [
+        {
+          "turn": 14,
+          "quote": "I see, well I can definitely check on your account status while we're here",
+          "explanation": "The customer stated they had a problem with their subscription (turn 3). The agent acknowledged and offered to check the account but did not offer the escalation route (supervisor/complaint form/internal team) as required when a customer makes a complaint."
+        },
+        {
+          "turn": 29,
+          "quote": "Very good. Thanks for contacting us, Mr. Domingo",
+          "explanation": "The agent closed the conversation without offering an escalation route or explicitly confirming how the customer could escalate the complaint if unresolved."
+        }
+      ]
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2039,
+    "output_tokens": 3008,
+    "cost_usd": 0.00653
+  },
+  "seconds": 27.0,
+  "dataset": "benchmark"
+}

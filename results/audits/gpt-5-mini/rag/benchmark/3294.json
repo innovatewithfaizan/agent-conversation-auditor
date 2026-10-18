@@ -1,0 +1,40 @@
+{
+  "conv_id": "3294",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "No agent policy violations detected in the provided excerpts. The agent pulled up the account, requested appropriate verification details before processing a return, only requested necessary data (address) to issue a return shipping label, and used appropriate conduct and escalation handling.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 2023,
+    "output_tokens": 1081,
+    "cost_usd": 0.00267
+  },
+  "seconds": 11.4,
+  "dataset": "benchmark"
+}

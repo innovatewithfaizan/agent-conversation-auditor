@@ -1,0 +1,361 @@
+{
+  "model": "gpt-5-mini",
+  "conversations_compared": 31,
+  "audits_available": {
+    "full": 80,
+    "rag": 80,
+    "agentic": 80
+  },
+  "benchmark": {
+    "plans": {
+      "near_miss": 8,
+      "violations": 18,
+      "clean": 5
+    },
+    "items": {
+      "near_miss:promises": 2,
+      "violation:conduct": 5,
+      "violation:personal_data": 4,
+      "near_miss:escalation": 3,
+      "violation:escalation": 3,
+      "violation:promises": 6,
+      "violation:verification": 4,
+      "near_miss:personal_data": 2,
+      "near_miss:conduct": 1
+    },
+    "severities": {
+      "major": 14,
+      "minor": 6,
+      "critical": 2
+    },
+    "subtlety": {
+      "obvious": 16,
+      "subtle": 6
+    },
+    "generator": {
+      "provider": "groq",
+      "verified": true,
+      "model": "openai/gpt-oss-20b + qwen/qwen3.8-27b"
+    },
+    "generator_stats": {
+      "generated": 89,
+      "rejected": 42,
+      "dropped": 12
+    }
+  },
+  "modes": {
+    "full": {
+      "conversations": 31,
+      "overall": {
+        "tp": 21,
+        "fp": 20,
+        "fn": 1,
+        "tn": 113,
+        "precision": 0.5121951219512195,
+        "recall": 0.9545454545454546,
+        "f1": 0.6666666666666667,
+        "specificity": 0.849624060150376,
+        "ci95": {
+          "precision": [
+            0.3611111111111111,
+            0.6666666666666666
+          ],
+          "recall": [
+            0.84,
+            1.0
+          ],
+          "f1": [
+            0.5161290322580645,
+            0.7941176470588236
+          ]
+        }
+      },
+      "categories": {
+        "personal_data": {
+          "tp": 4,
+          "fp": 5,
+          "fn": 0,
+          "tn": 22,
+          "precision": 0.4444444444444444,
+          "recall": 1.0,
+          "f1": 0.6153846153846153,
+          "specificity": 0.8148148148148148
+        },
+        "verification": {
+          "tp": 4,
+          "fp": 9,
+          "fn": 0,
+          "tn": 18,
+          "precision": 0.3076923076923077,
+          "recall": 1.0,
+          "f1": 0.47058823529411764,
+          "specificity": 0.6666666666666666
+        },
+        "promises": {
+          "tp": 6,
+          "fp": 5,
+          "fn": 0,
+          "tn": 20,
+          "precision": 0.5454545454545454,
+          "recall": 1.0,
+          "f1": 0.7058823529411764,
+          "specificity": 0.8
+        },
+        "escalation": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 1,
+          "tn": 28,
+          "precision": 1.0,
+          "recall": 0.6666666666666666,
+          "f1": 0.8,
+          "specificity": 1.0
+        },
+        "conduct": {
+          "tp": 5,
+          "fp": 1,
+          "fn": 0,
+          "tn": 25,
+          "precision": 0.8333333333333334,
+          "recall": 1.0,
+          "f1": 0.9090909090909091,
+          "specificity": 0.9615384615384616
+        }
+      },
+      "clean_chats": 5,
+      "clean_flagged": 0.4,
+      "near_misses": 8,
+      "near_miss_flagged": 0.0,
+      "violations": 22,
+      "localised_exact": 0.9523809523809523,
+      "localised_exchange": 0.9523809523809523,
+      "severity_exact": 1.0,
+      "kappa_qw": 0.6492602262837249,
+      "recall_by_subtlety": {
+        "obvious": 0.9375,
+        "subtle": 1.0
+      },
+      "recall_by_severity": {
+        "minor": 0.8333333333333334,
+        "major": 1.0,
+        "critical": 1.0
+      },
+      "quotes": 47,
+      "quotes_in_cited_turn": 1.0,
+      "quotes_in_conversation": 1.0,
+      "mean_tool_calls": 0,
+      "median_seconds": 16.4,
+      "cost_usd": 0.138,
+      "model": "gpt-5-mini"
+    },
+    "rag": {
+      "conversations": 31,
+      "overall": {
+        "tp": 12,
+        "fp": 22,
+        "fn": 10,
+        "tn": 111,
+        "precision": 0.35294117647058826,
+        "recall": 0.5454545454545454,
+        "f1": 0.42857142857142855,
+        "specificity": 0.8345864661654135,
+        "ci95": {
+          "precision": [
+            0.21212121212121213,
+            0.4878048780487805
+          ],
+          "recall": [
+            0.3333333333333333,
+            0.7619047619047619
+          ],
+          "f1": [
+            0.26666666666666666,
+            0.5714285714285715
+          ]
+        }
+      },
+      "categories": {
+        "personal_data": {
+          "tp": 4,
+          "fp": 3,
+          "fn": 0,
+          "tn": 24,
+          "precision": 0.5714285714285714,
+          "recall": 1.0,
+          "f1": 0.7272727272727273,
+          "specificity": 0.8888888888888888
+        },
+        "verification": {
+          "tp": 4,
+          "fp": 13,
+          "fn": 0,
+          "tn": 14,
+          "precision": 0.23529411764705882,
+          "recall": 1.0,
+          "f1": 0.38095238095238093,
+          "specificity": 0.5185185185185185
+        },
+        "promises": {
+          "tp": 2,
+          "fp": 3,
+          "fn": 4,
+          "tn": 22,
+          "precision": 0.4,
+          "recall": 0.3333333333333333,
+          "f1": 0.3636363636363636,
+          "specificity": 0.88
+        },
+        "escalation": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "tn": 27,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4,
+          "specificity": 0.9642857142857143
+        },
+        "conduct": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 4,
+          "tn": 24,
+          "precision": 0.3333333333333333,
+          "recall": 0.2,
+          "f1": 0.25,
+          "specificity": 0.9230769230769231
+        }
+      },
+      "clean_chats": 5,
+      "clean_flagged": 0.4,
+      "near_misses": 8,
+      "near_miss_flagged": 0.125,
+      "violations": 22,
+      "localised_exact": 0.9166666666666666,
+      "localised_exchange": 0.9166666666666666,
+      "severity_exact": 0.9166666666666666,
+      "kappa_qw": 0.4090121317157712,
+      "recall_by_subtlety": {
+        "obvious": 0.5,
+        "subtle": 0.6666666666666666
+      },
+      "recall_by_severity": {
+        "minor": 0.3333333333333333,
+        "major": 0.5714285714285714,
+        "critical": 1.0
+      },
+      "quotes": 41,
+      "quotes_in_cited_turn": 1.0,
+      "quotes_in_conversation": 1.0,
+      "mean_tool_calls": 0,
+      "median_seconds": 13.8,
+      "cost_usd": 0.1205,
+      "model": "gpt-5-mini"
+    },
+    "agentic": {
+      "conversations": 31,
+      "overall": {
+        "tp": 16,
+        "fp": 24,
+        "fn": 6,
+        "tn": 109,
+        "precision": 0.4,
+        "recall": 0.7272727272727273,
+        "f1": 0.5161290322580645,
+        "specificity": 0.8195488721804511,
+        "ci95": {
+          "precision": [
+            0.28205128205128205,
+            0.525
+          ],
+          "recall": [
+            0.5238095238095238,
+            0.92
+          ],
+          "f1": [
+            0.3773584905660377,
+            0.6376811594202899
+          ]
+        }
+      },
+      "categories": {
+        "personal_data": {
+          "tp": 4,
+          "fp": 5,
+          "fn": 0,
+          "tn": 22,
+          "precision": 0.4444444444444444,
+          "recall": 1.0,
+          "f1": 0.6153846153846153,
+          "specificity": 0.8148148148148148
+        },
+        "verification": {
+          "tp": 4,
+          "fp": 13,
+          "fn": 0,
+          "tn": 14,
+          "precision": 0.23529411764705882,
+          "recall": 1.0,
+          "f1": 0.38095238095238093,
+          "specificity": 0.5185185185185185
+        },
+        "promises": {
+          "tp": 4,
+          "fp": 2,
+          "fn": 2,
+          "tn": 23,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666,
+          "specificity": 0.92
+        },
+        "escalation": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 2,
+          "tn": 27,
+          "precision": 0.5,
+          "recall": 0.3333333333333333,
+          "f1": 0.4,
+          "specificity": 0.9642857142857143
+        },
+        "conduct": {
+          "tp": 3,
+          "fp": 3,
+          "fn": 2,
+          "tn": 23,
+          "precision": 0.5,
+          "recall": 0.6,
+          "f1": 0.5454545454545454,
+          "specificity": 0.8846153846153846
+        }
+      },
+      "clean_chats": 5,
+      "clean_flagged": 0.4,
+      "near_misses": 8,
+      "near_miss_flagged": 0.125,
+      "violations": 22,
+      "localised_exact": 1.0,
+      "localised_exchange": 1.0,
+      "severity_exact": 0.9375,
+      "kappa_qw": 0.43946960564835547,
+      "recall_by_subtlety": {
+        "obvious": 0.625,
+        "subtle": 1.0
+      },
+      "recall_by_severity": {
+        "minor": 0.6666666666666666,
+        "major": 0.7142857142857143,
+        "critical": 1.0
+      },
+      "quotes": 43,
+      "quotes_in_cited_turn": 1.0,
+      "quotes_in_conversation": 1.0,
+      "mean_tool_calls": 1.2903225806451613,
+      "median_seconds": 21.9,
+      "cost_usd": 0.1905,
+      "model": "gpt-5-mini"
+    }
+  },
+  "ground_truth_file": "results/subsets/generator_gpt_oss.json"
+}

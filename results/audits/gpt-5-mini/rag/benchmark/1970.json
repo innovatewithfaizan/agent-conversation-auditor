@@ -1,0 +1,40 @@
+{
+  "conv_id": "1970",
+  "source": "benchmark",
+  "mode": "rag",
+  "provider": "openai",
+  "model": "gpt-5-mini",
+  "effort": "medium",
+  "summary": "No policy violations identified. Agent handled a general store-hours question without requesting unnecessary personal or payment data, no verification was required, no improper promises or escalations were made, and conduct was acceptable.",
+  "categories": {
+    "personal_data": {
+      "severity": "none",
+      "findings": []
+    },
+    "verification": {
+      "severity": "none",
+      "findings": []
+    },
+    "promises": {
+      "severity": "none",
+      "findings": []
+    },
+    "escalation": {
+      "severity": "none",
+      "findings": []
+    },
+    "conduct": {
+      "severity": "none",
+      "findings": []
+    }
+  },
+  "tool_calls": [],
+  "usage": {
+    "calls": 1,
+    "input_tokens": 1980,
+    "output_tokens": 762,
+    "cost_usd": 0.00202
+  },
+  "seconds": 6.5,
+  "dataset": "benchmark"
+}
