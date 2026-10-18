@@ -41,3 +41,24 @@ def test_show_and_stats_on_a_small_abcd_file(monkeypatch, tmp_path, capsys):
     assert "1 conversations" in capsys.readouterr().out
     with pytest.raises(SystemExit):
         cli.main(["show", "abcd", "999"])
+
+
+def test_estimate_and_audit_commands_on_a_jsonl_dataset(monkeypatch, tmp_path, capsys):
+    from auditor import index, transcripts
+    from test_audit import CONV, FakeBackend, submit
+
+    path = tmp_path / "bench.jsonl"
+    transcripts.save_jsonl([CONV], path)
+    cli.main(["estimate", str(path), "--model", "gpt-5-mini"])
+    out = capsys.readouterr().out
+    assert "1 conversations" in out and "agentic" in out and "total" in out
+
+    monkeypatch.setattr(config, "AUDITS_DIR", tmp_path / "audits")
+    monkeypatch.setattr(cli, "make_backend", lambda args: FakeBackend([submit()]))
+    monkeypatch.setattr(index, "persistent_store", index.memory_store)
+    cli.main(["audit", str(path), "--mode", "full", "--model", "fake/model"])
+    saved = tmp_path / "audits" / "fake_model" / "full" / "bench" / "c1.json"
+    rec = json.loads(saved.read_text())
+    assert rec["dataset"] == "bench" and rec["categories"]["verification"]["severity"] == "major"
+    cli.main(["audit", str(path), "--mode", "full", "--model", "fake/model"])  # resumes: nothing to do
+    assert "auditing 0 conversations" in capsys.readouterr().out
