@@ -26,3 +26,6 @@ _moved_copies/
 # OS and editors
 .DS_Store
 .idea/
+
+# Private handoff notes (budget, personal context)
+*.local.md
