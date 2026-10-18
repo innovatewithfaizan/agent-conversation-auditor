@@ -30,3 +30,17 @@ TURN_GAP_MS = 700
 # tokens. Unset: the provider's default (6500 on Groq for its free tier,
 # no limit elsewhere). 0 disables it.
 MAX_PROMPT_TOKENS = int(os.environ["MAX_PROMPT_TOKENS"]) if os.environ.get("MAX_PROMPT_TOKENS") else None
+
+# Auditor retrieval and tool budget. Chats are short (ABCD median 21 turns):
+# with 2 chunks per category the RAG excerpts covered almost a whole 25-turn
+# chat, so the baseline takes 1 chunk (4 turns) per category and the agent
+# reads further with its tools.
+TOP_K_CHUNKS = 1
+AGENT_SEARCH_K = 3
+AGENT_MAX_TOOL_CALLS = 6
+AUDITS_DIR = RESULTS_DIR / "audits"
+
+
+def audits_dir(model: str, mode: str, dataset: str) -> Path:
+    """results/audits/<model>/<mode>/<dataset>/, so runs never mix."""
+    return AUDITS_DIR / model.replace("/", "_") / mode / dataset
