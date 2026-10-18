@@ -2,7 +2,7 @@
 
 **Did the support agent, human or AI, follow the policy?** This project is an agentic RAG auditor that reads customer-support conversations, checks them against a written policy, and cites the exact turn behind every finding. It is scored against **known ground truth**: we plant violations into real chats ourselves and record where, so every number is a measurement, not a guess.
 
-> **Status (October 2026):** the code, the benchmark generator, the API and the web app are built and tested. The numbers below come from a **10-conversation pilot** with gpt-5-mini; the run on the full 80-conversation benchmark is next. Pilot numbers have very wide confidence intervals and should be read as "the pipeline works end to end", not as final accuracy.
+> **Result (80 conversations, gpt-5-mini):** reading the whole transcript, the auditor caught **84%** of planted violations (95% CI 73–93%). It cited the planted turn 95% of the time, raised **no false alarms on near-misses**, and every quote it gave exists in the turn it cites. An agent that searches the conversation with tools caught 70%; fixed retrieval caught 52%. The weak spot is **over-flagging**: 40% of the full-transcript reader's flags were on planted violations, and most of the rest landed on the original agents' own verification and data-handling gaps. It cost **$0.0046 per conversation**.
 
 ---
 
@@ -12,7 +12,7 @@
 |---|---|---|
 | **A business or non-technical reader** | What it does, why it matters, how well it works, what it costs, the risks | [The short version](#the-short-version) → [Business overview](#business-overview-no-code) → [Glossary](#glossary) |
 | **New to the code (intern, student)** | What the ideas mean, how to run it, where to start reading | [The short version](#the-short-version) → [Key ideas](#key-ideas-in-five-minutes) → [Your first hour](#your-first-hour) → [Code tour](#code-tour) |
-| **A senior engineer or reviewer** | Architecture, evaluation rigour, trade-offs, what is not proven | [How it works](#how-it-works) → [Pilot results](#pilot-results) → [Design decisions](#design-decisions-and-trade-offs) → [Threats to validity](#threats-to-validity) |
+| **A senior engineer or reviewer** | Architecture, evaluation rigour, trade-offs, what is not proven | [How it works](#how-it-works) → [Results](#results) → [Design decisions](#design-decisions-and-trade-offs) → [Threats to validity](#threats-to-validity) |
 
 ---
 
@@ -38,13 +38,14 @@ The policy itself is a readable document: [`policy/support_policy.md`](policy/su
 
 Most "AI judge" projects score themselves against labels that are themselves AI guesses. Here we **plant** violations into real customer-service chats at known turns, plus **near-misses** (turns that look risky but follow the rules) and **untouched chats**. The auditor never sees what was planted. We then count what it catches, what it misses, and what it wrongly flags.
 
-### Pilot results in plain words (10 conversations, gpt-5-mini)
+### Results in plain words (80 conversations, gpt-5-mini)
 
-- **Reading the whole conversation**, the auditor caught **all 9** planted violations, and its findings pointed at the planted turn 89% of the time.
-- **About half of its flags were on real planted problems** (precision 50%). Many of the rest were on the *original* human agents' own slips: on inspection, they skipped verification steps that the dataset's handbook requires.
-- **It raised no false alarms on the near-misses**, the turns designed to look like violations.
-- **Every quote it gave exists, word for word, in the turn it cites.**
-- **Cost:** half a cent to just under one cent per conversation per method.
+- **Reading the whole conversation**, the auditor caught **42 of 50** planted violations (84%), and its findings pointed at the planted turn 95% of the time.
+- **Letting it search with tools beats fixed retrieval:** 70% caught against 52%, for about 1.5 tool calls per conversation.
+- **It never flagged a near-miss** (0 of 15), the turns designed to look like violations without breaking a rule.
+- **It over-flags:** only 40% of its flags were on planted violations. It also flagged 17 of the 27 untouched chats, mostly for identity verification and personal data. Some of these point to real handbook gaps by the original human agents.
+- **Its quotes are real:** 100% of 133 quotes appear word for word in the turn they cite.
+- **Cost:** under half a cent per conversation ($0.0046).
 
 ### One conversation, end to end
 
@@ -53,7 +54,7 @@ Chat #6178 is a real customer asking about a "mystery fee". We planted two viola
 - **Full-transcript auditor:** caught both, citing turns 2 and 20.
 - **Agentic auditor:** caught the refund. It **missed** the card number, because it decided its starting excerpts were enough and never used its search tools.
 
-That one example shows the whole story of the pilot.
+That example captures the main pattern: an agent that trusts its first excerpts misses what it never reads.
 
 ---
 
@@ -79,23 +80,23 @@ These are possible uses, not products that exist:
 
 ### Results so far, in plain words
 
-| Question | Pilot answer (10 conversations) |
+| Question | Answer (80 conversations) |
 |---|---|
-| Does it find planted violations? | Reading the full transcript: 9 of 9. With retrieval only: 6 of 9 |
-| Are its flags right? | About half point to planted problems; most of the rest point to real slips in the original chats |
-| Does it over-react to things that look risky but are fine? | No false alarms on the 2 near-misses |
+| Does it find planted violations? | Reading the full transcript: 84%. With search tools: 70%. With fixed retrieval: 52% |
+| Are its flags right? | 40% point to planted problems. It also flags most untouched chats, partly for real slips by the original agents |
+| Does it over-react to things that look risky but are fine? | No false alarms on the 15 near-misses (full transcript) |
 | Can you trust its quotes? | Yes: 100% of quotes are found word for word in the cited turn |
-| What does it cost? | $0.005–$0.008 per conversation per method (gpt-5-mini list price) |
+| What does it cost? | Under half a cent per conversation (gpt-5-mini list price) |
 
-The full benchmark (80 conversations) will narrow these numbers; the pilot is too small for firm conclusions.
+The intervals are still wide at 80 conversations (about ±10 points on recall).
 
 ### Cost and speed
 
 | Method | Cost per conversation | Median time |
 |---|---|---|
-| Fixed search (RAG) | $0.0049 | 21 s |
-| Agent with search tools | $0.0082 | 33 s |
-| Read the whole transcript | $0.0059 | 27 s |
+| Fixed search (RAG) | $0.0041 | 16 s |
+| Agent with search tools | $0.0069 | 23 s |
+| Read the whole transcript | $0.0046 | 18 s |
 
 These are gpt-5-mini list prices; many conversations run in parallel. The generation of test data uses a free model tier.
 
@@ -109,7 +110,7 @@ These are gpt-5-mini list prices; many conversations run in parallel. The genera
 
 ### Risks and responsible use
 
-- **False flags:** roughly half of the pilot's flags were not on planted violations. Treat flags as "please review", not as verdicts.
+- **False flags:** 60% of the flags were not on planted violations, and most untouched chats got at least one. Treat flags as "please review", not as verdicts.
 - **Synthetic test violations** are written by an AI. They are realistic, but real violations can be subtler or messier.
 - **Privacy:** the project uses a public dataset and fake personal details (generated by the Faker library). In the web app, visitors use their own API key, which is used for one request and never stored or logged.
 
@@ -251,23 +252,41 @@ Untouched ABCD chats can contain real slips by the original agents. They count a
 
 ---
 
-## Pilot results
+## Results
 
-10 benchmark conversations (6 with violations, 2 near-misses, 2 untouched; 9 planted violations), gpt-5-mini at reasoning effort medium. Source: [`results/pilot/metrics.md`](results/pilot/metrics.md).
+80 benchmark conversations: 38 with planted violations (50 violations in total), 15 with a near-miss, and 27 untouched. Audited by gpt-5-mini at reasoning effort medium. Source: [`results/metrics/gpt-5-mini/metrics.md`](results/metrics/gpt-5-mini/metrics.md).
 
-| Method | Recall | 95% CI | Precision | 95% CI | Near-miss false alarms | Cites planted turn | Severity exact | Weighted κ | Quotes in cited turn | Tool calls | Cost (10 chats) |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| Full transcript | **100%** | 100–100% | **50%** | 25–68% | 0 of 2 | 89% | 78% | 0.58 | 100% of 23 | 0.0 | $0.06 |
-| RAG | **67%** | 40–100% | **40%** | 17–55% | 0 of 2 | 83% | 83% | 0.38 | 100% of 20 | 0.0 | $0.05 |
-| Agentic RAG | **67%** | 40–100% | **38%** | 17–50% | 0 of 2 | 83% | 100% | 0.47 | 100% of 17 | 1.6 | $0.08 |
+| Method | Recall | 95% CI | Precision | 95% CI | F1 | Near-miss false alarms | Untouched chats flagged | Cites planted turn | Severity exact | Weighted κ | Quotes in cited turn | Tool calls | Cost (80 chats) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Full transcript | **84%** | 73–93% | **40%** | 31–50% | 0.55 | 0 of 15 | 17 of 27 | 95% | 88% | 0.48 | 100% of 133 | 0.0 | $0.37 |
+| Agentic RAG | **70%** | 58–82% | **35%** | 27–43% | 0.47 | 1 of 15 | 17 of 27 | 94% | 91% | 0.42 | 98% of 121 | 1.5 | $0.55 |
+| RAG | **52%** | 39–66% | **29%** | 20–38% | 0.37 | 2 of 15 | 19 of 27 | 92% | 85% | 0.29 | 100% of 110 | 0.0 | $0.32 |
 
-![Recall by category in the pilot](results/pilot/detection_by_category.png)
+A baseline that never flags anything has 0% recall, no false alarms and κ 0.
 
-**What the pilot says, carefully:**
-- **The full transcript caught everything; retrieval missed a third.** On chats of about 30 turns, reading everything is cheap and RAG's single chunk per category can miss the planted turn.
-- **The agent rarely searched** (1.6 tool calls on average) and missed exactly the same three violations RAG missed, including the card-number request in chat #6178. Whether prompting it to search more closes the gap is an open question for the full run.
-- **Precision is limited by the original chats.** Both untouched chats were flagged. On inspection, the flags point to real handbook gaps, for example a subscription payment taken without the order ID the handbook requires. So "false positive" here partly means "a real slip we did not plant".
-- **Calibration happened on these 10 chats.** The first pass showed that my verification rule was stricter than ABCD's handbook (adding or removing a subscription only needs the account pulled up), and that the auditor filed one problem under two categories. Fixing both raised full-transcript precision from 41% to 50% and removed near-miss false alarms. The other 70 benchmark chats were not looked at, and that is where the real numbers will come from.
+![Recall of planted violations by category](results/metrics/gpt-5-mini/detection_by_category.png)
+
+Recall by category (planted count in brackets):
+
+| Category | Full transcript | Agentic RAG | RAG |
+|---|---|---|---|
+| Personal and payment data (12) | 92% | 83% | 67% |
+| Identity verification (8) | 100% | 100% | 100% |
+| Commitments and claims (12) | 75% | 50% | 33% |
+| Complaints and escalation (10) | 70% | 60% | 40% |
+| Honesty and conduct (8) | 88% | 62% | 25% |
+
+**What the numbers say:**
+- **Reading everything wins on chats this size** (24–58 turns, median 29). Fixed retrieval takes one 4-turn chunk per category and misses about half the planted turns. The agent recovers much of that by reading and searching, but it still stops early: it averaged 1.5 tool calls when it could use 6.
+- **No method over-reacts to near-misses** (0–2 of 15), but **all of them over-flag untouched chats**. On untouched chats the flags are mostly identity verification (9–13 per method) and personal data (8). Reading a sample, many point to real gaps in the original chats against ABCD's handbook, for example a subscription payment taken without the order ID. Precision is therefore a lower bound, but over-flagging is still the main weakness.
+- **Findings are well grounded:** when a violation is caught, the finding cites the planted turn 92–95% of the time, and 98–100% of quotes are verbatim.
+- **Critical violations** (7 planted) are where the agent did best (86%, against 57% for the full transcript), but 7 items is too few to read much into.
+
+**Two checks:**
+- **Calibration.** The policy wording and two prompt rules were adjusted after a 10-chat pilot. On the [70 chats never looked at](results/subsets/unseen/metrics.md), the picture holds: recall 80% / 71% / 49% (full / agentic / RAG), precision 38% / 35% / 26%.
+- **Generator.** Qwen planted the first 29 chats with violations or near-misses; `gpt-oss-20b` planted the last 31, after Qwen's free daily quota ran out. `gpt-oss-20b`'s violations are blunter: the full-transcript reader caught [95% of them](results/subsets/generator_gpt_oss/metrics.md) against [75% of Qwen's](results/subsets/generator_qwen/metrics.md). For agentic RAG (73% vs 68%) and RAG (55% vs 50%) the gap is small.
+
+The [10-chat pilot](results/pilot/metrics.md) is kept for reference.
 
 ---
 
@@ -311,10 +330,10 @@ cd agent-conversation-auditor && python3.11 -m venv .venv && .venv/bin/pip insta
 .venv/bin/python -m pytest -q
 ```
 
-**4. Re-score the pilot without any API key.**
+**4. Re-score the committed audits without any API key.**
 
 ```bash
-.venv/bin/python -m auditor evaluate --model gpt-5-mini --manifest results/pilot/manifest.json --conversations results/pilot/conversations.jsonl --out results/pilot
+.venv/bin/python -m auditor evaluate --model gpt-5-mini
 ```
 
 **5. Look at the data.**
@@ -336,7 +355,7 @@ cd web && npm ci && npm run dev
 **7. Run a live audit.** Put a free [Groq key](https://console.groq.com/keys) in `.env` (copy `.env.example`), then:
 
 ```bash
-.venv/bin/python -m auditor audit results/pilot/conversations.jsonl --limit 1 --mode agentic --provider groq --model openai/gpt-oss-120b
+.venv/bin/python -m auditor audit data/benchmark/benchmark.jsonl --limit 1 --mode agentic --provider groq --model openai/gpt-oss-120b
 ```
 
 ### The whole pipeline
@@ -383,7 +402,7 @@ About 2,300 lines of Python, 900 lines of Python tests, and 1,200 lines of TypeS
 |---|---|---|
 | Plant violations instead of labelling with an LLM | exact ground truth: turn, category and severity are known | planted text is AI-written and may be easier or harder than real violations |
 | Near-misses and untouched chats in the benchmark | measures over-flagging, not only recall | untouched chats can hide real slips, so precision is a lower bound |
-| Generator from a different model family (Qwen) than the auditor (gpt-5-mini) | no model grades text it wrote itself | the free tier's daily cap made planting slow |
+| Generators other than the auditor: Qwen, then `gpt-oss-20b` | no model grades text it wrote itself | Qwen's free daily cap forced the switch halfway; `gpt-oss-20b` is also an OpenAI model and its violations are easier to catch (reported separately) |
 | Policy as a Markdown document in the prompt | readable by non-engineers; one source of truth | long prompts (about 1,400 tokens of policy per call) |
 | Strict tool schemas and validation | structured, checkable output on any OpenAI-compatible provider | a retry when the model gets it wrong |
 | Agent starts from the RAG excerpts | the comparison isolates what the tools add | the agent often thinks the excerpts suffice |
@@ -394,9 +413,9 @@ About 2,300 lines of Python, 900 lines of Python tests, and 1,200 lines of TypeS
 
 ## Threats to validity
 
-1. **Pilot size.** 10 conversations and 9 planted violations: the intervals span tens of points. The 80-chat run is needed before any claim about which method is better.
-2. **Calibration on the pilot.** The policy wording and two prompt rules were adjusted after looking at the pilot. Final numbers must come from the 70 chats not used for this.
-3. **Synthetic violations.** They are realistic but AI-written. The near-misses test over-flagging only in the categories where they were planted (conduct, in the pilot).
+1. **Size.** 80 conversations and 50 planted violations: about ±10 points on recall, and only 7–12 items per category. Full transcript beats RAG clearly; full against agentic is within the intervals.
+2. **Calibration on a pilot.** The policy wording and two prompt rules were adjusted after looking at 10 chats. On the other 70 the results are within a few points (see [Results](#results)).
+3. **Synthetic violations from two generators.** They are AI-written; `gpt-oss-20b`'s are easier to catch than Qwen's, and 12 planned items were dropped after failing the independent check twice. Real violations can be subtler.
 4. **Untouched chats aren't guaranteed clean.** Real agents' slips appear as false positives.
 5. **One auditor model, one run.** Run-to-run variance and other models are not measured yet.
 6. **Text only.** No audio cues. Real call transcripts (CallCenterEN) have no speaker labels.
@@ -410,7 +429,10 @@ policy/support_policy.md    the written policy
 auditor/                    Python package: parsers, index, LLM client, auditor, planting, evaluation, API, CLI
 tests/                      pytest suite (fake LLM backends; no network beyond the embedding model)
 web/                        React app (Vite + TypeScript); web/public/data is the static export
-results/pilot/              pilot conversations, manifest, metrics, chart
+results/metrics/gpt-5-mini/ evaluation of the full benchmark (metrics.md, metrics.json, chart)
+results/subsets/            the same audits scored on the unseen chats and per generator
+results/pilot/              the 10-chat pilot used for calibration
+data/benchmark/             the benchmark: benchmark.jsonl and manifest.json
 results/audits/             saved audits: <model>/<mode>/<dataset>/<conv_id>.json
 data/raw/                   downloaded datasets (gitignored)
 .github/workflows/          CI (pytest, web tests and build) and GitHub Pages deploy
